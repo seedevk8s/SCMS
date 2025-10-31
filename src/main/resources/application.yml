@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: scms
+  
+  datasource:
+    url: jdbc:mysql://localhost:3306/scms_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  
+  security:
+    user:
+      name: admin
+      password: admin
+
+# JWT Configuration
+jwt:
+  secret: your-256-bit-secret-key-change-this-in-production-environment
+  expiration: 86400000  # 24시간 (밀리초)
+
+# Server Configuration
+server:
+  port: 8080
+
+# Logging
+logging:
+  level:
+    com.university.scms: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
