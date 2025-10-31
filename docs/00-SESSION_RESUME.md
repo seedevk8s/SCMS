@@ -14,7 +14,7 @@ C:\Users\USER\Documents\choongang\Project\scms\scms-backend
 **Phase 1: 기반 구축** - 진행 중
 
 ### 현재 Git 브랜치
-**feature/phase1-erd-design** - Entity 클래스 생성 작업 중
+**feature/entity-mileage-domain** - Entity 클래스 생성 작업 중
 
 ### GitHub 저장소
 ```
@@ -61,14 +61,14 @@ https://github.com/seedevk8s/SCMS.git
 
 ### 5. Entity 클래스 생성 (진행 중)
 
-#### ✅ 완료된 Entity (5개 - 22%)
+#### ✅ 완료된 Entity (12개 - 52%)
 
 ##### Auth Domain (2개)
 - ✅ **BaseEntity** - 공통 Audit 필드 (domain/common/BaseEntity.java)
 - ✅ **User** - 사용자 엔티티 (학생, 교직원, 관리자)
 - ✅ **UserRole** - 역할 enum
 
-##### Program Domain (3개)
+##### Program Domain (3개 Entity + 3개 Enum)
 - ✅ **Program** - 비교과 프로그램
   - organizerId (Long) - Auth Domain 참조
   - applications, participants - JPA 관계
@@ -87,13 +87,52 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ **ApplicationStatus** - 신청 상태 (PENDING, APPROVED, REJECTED, CANCELLED)
 - ✅ **AttendanceStatus** - 출석 상태 (REGISTERED, ATTENDED, ABSENT, CANCELLED)
 
-#### ⏳ 다음 작업: Mileage Domain (3개)
-- [ ] MileageAccount
-- [ ] MileageTransaction
-- [ ] CompetencyCertification
+##### Mileage Domain (3개 Entity + 2개 Enum)
+- ✅ **MileageAccount** - 마일리지 계정
+  - userId (Long) - Auth Domain 참조
+  - transactions - JPA 관계 (OneToMany)
+  - 비즈니스 메서드: earn(), use(), expire(), adjust()
+- ✅ **MileageTransaction** - 마일리지 거래 내역
+  - account - JPA 관계 (ManyToOne, 외래키 제약조건 제거)
+  - userId (Long) - Auth Domain 참조
+  - 출처 추적: sourceType, sourceId
+  - 거래 후 잔액 기록: balanceAfter
+- ✅ **CompetencyCertification** - 역량 인증
+  - userId, verifiedBy, fileId (Long) - 다른 Domain 참조
+  - 비즈니스 메서드: approve(), reject(), isExpired()
 
-#### ⏳ 남은 Entity (18개)
-- [ ] Competency Domain (4개)
+##### Mileage Domain Enums (2개)
+- ✅ **TransactionType** - 거래 유형 (EARN, USE, EXPIRE, ADJUST)
+- ✅ **VerificationStatus** - 검증 상태 (PENDING, APPROVED, REJECTED)
+
+##### Competency Domain (4개 Entity + 2개 Enum) ⭐ NEW
+- ✅ **CompetencySurvey** - 역량 진단 설문
+  - questions, responses, results - JPA 관계 (OneToMany)
+  - createdBy (Long) - Auth Domain 참조
+  - 비즈니스 메서드: activate(), deactivate(), canRespond(), isWithinPeriod()
+- ✅ **SurveyQuestion** - 설문 문항
+  - survey - JPA 관계 (ManyToOne, 외래키 제약조건 제거)
+  - options (String) - JSON 저장
+  - 비즈니스 메서드: update(), changeOrder(), isChoice(), isScale()
+- ✅ **SurveyResponse** - 설문 응답
+  - BaseEntity 상속 X (수정 불가 데이터)
+  - survey, question - JPA 관계
+  - userId (Long) - Auth Domain 참조
+- ✅ **CompetencyResult** - 진단 결과
+  - survey - JPA 관계
+  - categoryScores (String) - JSON 저장
+  - 비즈니스 메서드: update(), determineLevel()
+
+##### Competency Domain Enums (2개)
+- ✅ **TargetRole** - 설문 대상 (STUDENT, STAFF, ALL)
+- ✅ **QuestionType** - 문항 유형 (SINGLE_CHOICE, MULTIPLE_CHOICE, SCALE, TEXT)
+
+#### ⏳ 다음 작업: Counseling Domain (3개)
+- [ ] CounselingRequest
+- [ ] CounselingSession
+- [ ] CounselingNote
+
+#### ⏳ 남은 Entity (11개)
 - [ ] Counseling Domain (3개)
 - [ ] Career Domain (3개)
 - [ ] File Domain (1개)
@@ -118,90 +157,33 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ 원격 저장소 연결 (GitHub)
 - ✅ Phase 1 초기 설정 커밋
 - ✅ main 브랜치에 푸시 완료
-- ✅ ERD 설계용 브랜치 생성 (feature/phase1-erd-design)
+- ✅ ERD 설계 브랜치 생성 및 머지 (feature/phase1-erd-design)
+- ✅ Mileage Domain 작업용 브랜치 생성 (feature/entity-mileage-domain)
 
 ---
 
 ## 🎯 현재 작업: Entity 클래스 생성
 
-### 진행 상황: 5/23 완료 (22%)
+### 진행 상황: 12/23 완료 (52%)
 
-#### ✅ 완료 (5개)
+#### ✅ 완료 (12개)
 1. ✅ BaseEntity
-2. ✅ User
-3. ✅ Program
-4. ✅ ProgramApplication
-5. ✅ ProgramParticipant
+2. ✅ User + UserRole
+3. ✅ Program + ProgramStatus
+4. ✅ ProgramApplication + ApplicationStatus
+5. ✅ ProgramParticipant + AttendanceStatus
+6. ✅ MileageAccount + TransactionType
+7. ✅ MileageTransaction
+8. ✅ CompetencyCertification + VerificationStatus
+9. ✅ CompetencySurvey + TargetRole
+10. ✅ SurveyQuestion + QuestionType
+11. ✅ SurveyResponse
+12. ✅ CompetencyResult
 
-#### ⏳ 다음 작업: Mileage Domain (3개)
-1. MileageAccount - 마일리지 계정
-2. MileageTransaction - 마일리지 거래 내역
-3. CompetencyCertification - 역량 인증
-
-### JPA 하이브리드 전략 구현 예시
-
-#### Program Entity (완료)
-```java
-@Entity
-public class Program extends BaseEntity {
-    // ✅ 다른 도메인: ID만 저장
-    @Column(name = "organizer_id")
-    private Long organizerId;  // User ID (외래키 없음)
-    
-    // ✅ 같은 도메인: JPA 관계 (외래키 제약조건 제거)
-    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
-    private List<ProgramApplication> applications;
-}
-```
-
-#### ProgramApplication Entity (완료)
-```java
-@Entity
-public class ProgramApplication extends BaseEntity {
-    // ✅ 같은 도메인: JPA 관계
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "program_id",
-                foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Program program;
-    
-    // ✅ 다른 도메인: ID만 저장
-    @Column(name = "user_id")
-    private Long userId;  // User ID (외래키 없음)
-}
-```
-
-### 남은 Entity 목록 (18개)
-
-#### Mileage Domain (3개) ← 현재 위치
-- [ ] MileageAccount
-- [ ] MileageTransaction
-- [ ] CompetencyCertification
-
-#### Competency Domain (4개)
-- [ ] CompetencySurvey
-- [ ] SurveyQuestion
-- [ ] SurveyResponse
-- [ ] CompetencyResult
-
-#### Counseling Domain (3개)
-- [ ] CounselingRequest
-- [ ] CounselingSession
-- [ ] CounselingNote
-
-#### Career Domain (3개)
-- [ ] Portfolio
-- [ ] JobPosting
-- [ ] JobBookmark
-
-#### File Domain (1개)
-- [ ] FileEntity
-
-#### Notification Domain (2개)
-- [ ] Notification
-- [ ] EmailLog
-
-#### System Domain (1개)
-- [ ] AccessLog
+#### ⏳ 다음 작업: Counseling Domain (3개)
+1. CounselingRequest - 상담 신청
+2. CounselingSession - 상담 세션
+3. CounselingNote - 상담 기록
 
 ---
 
@@ -210,40 +192,29 @@ public class ProgramApplication extends BaseEntity {
 ### 📌 추천 멘트 (복사해서 사용)
 
 ```
-안녕! SCMS 프로젝트 이어서 진행하자.
+SCMS 프로젝트 이어서 진행하자!
 
-지난 세션에서:
-- Spring Boot 3.5.7 프로젝트 초기 설정 완료
+완료:
 - ERD 설계 완료 (23개 테이블, 9개 도메인)
-- JPA 하이브리드 전략 확정
-- Entity 생성: BaseEntity, User, Program Domain 완료 (5/23)
+- Entity 생성: Auth, Program, Mileage, Competency Domain 완료 (12/23, 52%)
 
-현재 브랜치: feature/phase1-erd-design
-현재 작업: Entity 클래스 생성 중 (Mileage Domain부터)
-진행률: 5/23 (22%)
+현재 브랜치: feature/entity-mileage-domain
+현재 작업: Counseling Domain Entity 3개 생성
+진행률: 12/23 (52%)
 
 프로젝트 위치: C:\Users\USER\Documents\choongang\Project\scms\scms-backend
 GitHub: https://github.com/seedevk8s/SCMS.git
 
-Mileage Domain Entity 생성부터 시작하자!
+Counseling Domain Entity 생성 시작!
 ```
 
-### 또는 간단하게
-
-```
-SCMS 프로젝트 계속하자!
-현재: Entity 생성 중 (5/23 완료, Mileage Domain부터 시작)
-브랜치: feature/phase1-erd-design
-경로: C:\Users\USER\Documents\choongang\Project\scms\scms-backend
-```
-
-### 또는 매우 간단하게
+### 간단 버전
 
 ```
 SCMS Entity 작성 계속!
-완료: BaseEntity, User, Program Domain (5/23)
-다음: MileageAccount, MileageTransaction, CompetencyCertification
-경로: C:\Users\USER\Documents\choongang\Project\scms\scms-backend
+완료: Auth, Program, Mileage, Competency Domain (12/23, 52%)
+다음: CounselingRequest, CounselingSession, CounselingNote
+브랜치: feature/entity-mileage-domain
 ```
 
 ---
@@ -258,67 +229,36 @@ docs/
 │   └── 01-phase1-foundation.md    # Phase 1 진행사항
 └── 02-design/
     └── 01-erd-design.md           # ERD 설계 (완료)
-
-MSA_ARCHITECTURE_GUIDE.md          # MSA 가이드
-PROJECT_SETUP_GUIDE.md             # 초기 설정 가이드
-README.md                          # 프로젝트 소개
 ```
 
 ### Entity 파일 (진행 중)
 ```
 src/main/java/com/university/scms/domain/
 ├── common/
-│   └── BaseEntity.java                    # ✅ 완료
+│   └── BaseEntity.java                           # ✅ 완료
 └── entity/
-    ├── User.java                          # ✅ 완료
-    ├── UserRole.java                      # ✅ 완료
-    ├── Program.java                       # ✅ 완료
-    ├── ProgramStatus.java                 # ✅ 완료
-    ├── ProgramApplication.java            # ✅ 완료
-    ├── ApplicationStatus.java             # ✅ 완료
-    ├── ProgramParticipant.java            # ✅ 완료
-    ├── AttendanceStatus.java              # ✅ 완료
-    ├── MileageAccount.java                # ⏳ 다음
-    ├── MileageTransaction.java            # ⏳ 예정
-    └── CompetencyCertification.java       # ⏳ 예정
-```
-
-### 주요 소스 파일
-```
-src/main/java/com/university/scms/
-├── ScmsApplication.java
-├── config/
-│   ├── JpaConfig.java
-│   └── SecurityConfig.java
-├── controller/
-│   └── HealthCheckController.java
-└── exception/
-    └── GlobalExceptionHandler.java
-```
-
----
-
-## 🔍 현재 프로젝트 확인 방법
-
-### IntelliJ에서 프로젝트 열기
-1. IntelliJ IDEA 실행
-2. File → Open
-3. `C:\Users\USER\Documents\choongang\Project\scms\scms-backend` 선택
-
-### 완성된 Entity 확인
-```
-src/main/java/com/university/scms/domain/
-├── common/BaseEntity.java              # Audit 필드
-├── entity/User.java                    # 사용자 (학생, 교직원, 관리자)
-├── entity/UserRole.java                # 역할 enum
-├── entity/Program.java                 # 비교과 프로그램
-├── entity/ProgramApplication.java      # 프로그램 신청
-└── entity/ProgramParticipant.java      # 프로그램 참여자
-```
-
-### ERD 설계 확인
-```
-docs/02-design/01-erd-design.md    # 전체 테이블 구조 및 다이어그램
+    ├── User.java                                 # ✅ 완료
+    ├── UserRole.java                             # ✅ 완료
+    ├── Program.java                              # ✅ 완료
+    ├── ProgramStatus.java                        # ✅ 완료
+    ├── ProgramApplication.java                   # ✅ 완료
+    ├── ApplicationStatus.java                    # ✅ 완료
+    ├── ProgramParticipant.java                   # ✅ 완료
+    ├── AttendanceStatus.java                     # ✅ 완료
+    ├── MileageAccount.java                       # ✅ 완료
+    ├── MileageTransaction.java                   # ✅ 완료
+    ├── TransactionType.java                      # ✅ 완료
+    ├── CompetencyCertification.java              # ✅ 완료
+    ├── VerificationStatus.java                   # ✅ 완료
+    ├── CompetencySurvey.java                     # ✅ 완료
+    ├── TargetRole.java                           # ✅ 완료
+    ├── SurveyQuestion.java                       # ✅ 완료
+    ├── QuestionType.java                         # ✅ 완료
+    ├── SurveyResponse.java                       # ✅ 완료
+    ├── CompetencyResult.java                     # ✅ 완료
+    ├── CounselingRequest.java                    # ⏳ 다음
+    ├── CounselingSession.java                    # ⏳ 예정
+    └── CounselingNote.java                       # ⏳ 예정
 ```
 
 ---
@@ -332,22 +272,22 @@ docs/02-design/01-erd-design.md    # 전체 테이블 구조 및 다이어그램
 - [x] 헬스체크 API
 - [x] MSA 가이드 문서
 - [x] Git 저장소 초기화
-- [x] main 브랜치 푸시
-- [x] ERD 설계 브랜치 생성
 - [x] **ERD 설계 완료** (23개 테이블)
 - [x] **JPA 전략 확정** (하이브리드)
 - [x] **BaseEntity 생성**
-- [x] **Auth Domain Entity 완성** (User, UserRole)
-- [x] **Program Domain Entity 완성** (Program, ProgramApplication, ProgramParticipant)
+- [x] **Auth Domain Entity 완성**
+- [x] **Program Domain Entity 완성**
+- [x] **Mileage Domain Entity 완성**
+- [x] **Competency Domain Entity 완성** ⭐
 
 ### 🔄 진행 중
-- [ ] **Entity 클래스 작성** ← 현재 단계 (5/23 완료, 22%)
+- [ ] **Entity 클래스 작성** ← 현재 단계 (12/23 완료, 52%)
   - [x] BaseEntity
   - [x] Auth Domain (2개)
   - [x] Program Domain (3개)
-  - [ ] Mileage Domain (3개) ← 다음 작업
-  - [ ] Competency Domain (4개)
-  - [ ] Counseling Domain (3개)
+  - [x] Mileage Domain (3개)
+  - [x] Competency Domain (4개)
+  - [ ] Counseling Domain (3개) ← 다음 작업
   - [ ] Career Domain (3개)
   - [ ] File Domain (1개)
   - [ ] Notification Domain (2개)
@@ -362,118 +302,42 @@ docs/02-design/01-erd-design.md    # 전체 테이블 구조 및 다이어그램
 
 ---
 
-## 💡 중요 설계 원칙 (재확인)
-
-### Program Domain 구현 예시 (완료)
-
-#### 1. 도메인 내부 관계 (JPA 사용)
-```java
-@Entity
-public class Program extends BaseEntity {
-    // 같은 도메인: JPA 관계 + 외래키 제약조건 제거
-    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
-    private List<ProgramApplication> applications;
-}
-
-@Entity
-public class ProgramApplication extends BaseEntity {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "program_id",
-                foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Program program;
-}
-```
-
-#### 2. 도메인 간 참조 (ID만 저장)
-```java
-@Entity
-public class Program extends BaseEntity {
-    // 다른 도메인(Auth): ID만 저장
-    @Column(name = "organizer_id")
-    private Long organizerId;  // User ID (외래키 없음)
-}
-
-@Entity
-public class ProgramApplication extends BaseEntity {
-    @Column(name = "user_id")
-    private Long userId;  // User ID (외래키 없음)
-    
-    @Column(name = "reviewed_by")
-    private Long reviewedBy;  // User ID (외래키 없음)
-}
-```
-
-#### 3. 비즈니스 메서드 포함
-```java
-@Entity
-public class Program extends BaseEntity {
-    public boolean canApply() { ... }
-    public boolean isFull() { ... }
-    public void changeStatus(ProgramStatus newStatus) { ... }
-}
-
-@Entity
-public class ProgramApplication extends BaseEntity {
-    public void approve(Long reviewerId) { ... }
-    public void reject(Long reviewerId, String reason) { ... }
-}
-```
-
----
-
-## 🎓 참고할 문서
-
-### 프로젝트 내부 문서
-1. **docs/02-design/01-erd-design.md** - 전체 ERD 설계
-2. **MSA_ARCHITECTURE_GUIDE.md** - MSA 전환 전략
-3. **docs/01-progress/01-phase1-foundation.md** - 상세 진행사항
-
-### Google Drive 문서
-- 원본 기획 문서: `1LPxYcGUIk_J7sn4BlCQeZrpfCZGavj8dZMRhIfEAAh4`
-
----
-
 ## 🚀 Entity 생성 진행 순서
 
-### ✅ 완료 (5개)
+### ✅ 완료 (12개 - 52%)
 - [x] BaseEntity
-- [x] User
-- [x] UserRole (enum)
-- [x] Program
-- [x] ProgramApplication
-- [x] ProgramParticipant
+- [x] User, UserRole
+- [x] Program, ProgramStatus
+- [x] ProgramApplication, ApplicationStatus
+- [x] ProgramParticipant, AttendanceStatus
+- [x] MileageAccount, TransactionType
+- [x] MileageTransaction
+- [x] CompetencyCertification, VerificationStatus
+- [x] CompetencySurvey, TargetRole
+- [x] SurveyQuestion, QuestionType
+- [x] SurveyResponse
+- [x] CompetencyResult
 
 ### ⏳ 다음 단계
 
-#### 1. Mileage Domain (3개) ← 현재 위치
-- [ ] MileageAccount - 마일리지 계정
-- [ ] MileageTransaction - 마일리지 거래 내역
-- [ ] CompetencyCertification - 역량 인증
-
-#### 2. Competency Domain (4개)
-- [ ] CompetencySurvey
-- [ ] SurveyQuestion
-- [ ] SurveyResponse
-- [ ] CompetencyResult
-
-#### 3. Counseling Domain (3개)
+#### 1. Counseling Domain (3개) ← 현재 위치
 - [ ] CounselingRequest
 - [ ] CounselingSession
 - [ ] CounselingNote
 
-#### 4. Career Domain (3개)
+#### 2. Career Domain (3개)
 - [ ] Portfolio
 - [ ] JobPosting
 - [ ] JobBookmark
 
-#### 5. File Domain (1개)
+#### 3. File Domain (1개)
 - [ ] FileEntity
 
-#### 6. Notification Domain (2개)
+#### 4. Notification Domain (2개)
 - [ ] Notification
 - [ ] EmailLog
 
-#### 7. System Domain (1개)
+#### 5. System Domain (1개)
 - [ ] AccessLog
 
 ---
@@ -497,51 +361,15 @@ public class ProgramApplication extends BaseEntity {
 - **Base URL**: http://localhost:8080
 
 ### Git
-- **현재 브랜치**: feature/phase1-erd-design
+- **현재 브랜치**: feature/entity-mileage-domain
 - **저장소**: https://github.com/seedevk8s/SCMS.git
-
----
-
-## 📞 문제 해결
-
-### 애플리케이션이 실행 안 될 때
-1. MySQL 서버 실행 확인
-2. application.yml의 DB 정보 확인
-3. Gradle 동기화: `./gradlew clean build`
-
-### ERD 확인이 필요할 때
-```
-docs/02-design/01-erd-design.md  # 전체 테이블 구조
-```
-
-### 완성된 Entity 참고
-```
-src/main/java/com/university/scms/domain/entity/
-├── Program.java              # 비즈니스 메서드 참고
-├── ProgramApplication.java   # 상태 관리 참고
-└── ProgramParticipant.java   # 출석/평가 로직 참고
-```
-
----
-
-## ✨ 다음 세션 준비사항
-
-### Claude에게 알려줄 정보
-1. 프로젝트 경로
-2. 현재 작업 단계 (Entity 생성 중 - 5/23 완료)
-3. 다음 작업: Mileage Domain Entity 3개
-
-### 필요한 도구
-- IntelliJ IDEA 실행
-- MySQL 서버 실행
-- ERD 설계 문서 참고 (docs/02-design/01-erd-design.md)
 
 ---
 
 ## 🎯 목표
 
 **Phase 1 완료까지 남은 작업:**
-1. Entity 클래스 작성 (진행 중 - 5/23 완료, 22%)
+1. Entity 클래스 작성 (진행 중 - 12/23 완료, 52%)
 2. Repository 인터페이스 작성
 3. Service 계층 기본 구조
 4. JWT 인증 시스템 구현
@@ -552,11 +380,11 @@ src/main/java/com/university/scms/domain/entity/
 ---
 
 **작성일**: 2025-10-31  
-**다음 작업**: Mileage Domain Entity 생성  
-**예상 소요시간**: Entity 18개 남음 (약 50-70분)  
-**최종 업데이트**: 2025-10-31 (Program Domain 완성, Mileage Domain 시작 직전)
+**다음 작업**: Counseling Domain Entity 생성 (3개)  
+**예상 소요시간**: Entity 11개 남음  
+**최종 업데이트**: 2025-10-31 (Competency Domain 완성, Counseling Domain 시작 직전)
 
 ---
 
 **세션을 재개할 준비가 되었습니다! 🚀**
-**진행률: 5/23 Entity 완료 (22%)**
+**진행률: 12/23 Entity 완료 (52%)**
