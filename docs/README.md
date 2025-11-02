@@ -151,23 +151,23 @@ Git 사용 규칙 및 이력
 
 ## 📊 현재 프로젝트 상태 요약
 
-### 진행률: 100% (23/23 Entity) ✅ 완료!
+### 진행률: 100% (26/26 Entity) ✅ 완료!
 
-**✅ 완료 (23개)**
-- Core: BaseEntity (1)
-- Auth Domain: User + UserRole (2)
-- Program Domain: Program, Application, Participant + 3 Enum (6)
-- Mileage Domain: Account, Transaction, Certification + 2 Enum (5)
-- Competency Domain: Survey, Question, Response, Result + 2 Enum (6)
-- Career Domain: Plan, Goal, Milestone (3) ⭐ NEW
-- Counseling Domain: Reservation, Session, Availability + Status (4) ⭐ NEW
-- File Domain: FileMetadata (1) ⭐ NEW
-- Notification Domain: Notification, Template (2) ⭐ NEW
-- System Domain: SystemLog, AuditLog (2) ⭐ NEW
+**✅ 완료 (26개)**
+- Common: BaseEntity, CommonCode (2개)
+- Auth Domain: User + UserRole (2개)
+- Program Domain: Program, Application, Participant, Category + 3 Enum (7개)
+- Mileage Domain: Account, Transaction, Certification + 2 Enum (5개)
+- Competency Domain: Survey, Question, Response, Result + 2 Enum (6개)
+- Career Domain: Plan, Goal, Milestone (3개)
+- Counseling Domain: Reservation, Session, Availability, Counselor + Status (5개)
+- File Domain: FileMetadata (1개)
+- Notification Domain: Notification, Template (2개)
+- System Domain: SystemLog, AuditLog (2개)
 
 ### 현재 브랜치
 ```
-main (entity 레이어 완료)
+feature/entity-essential-missing (ERD 필수 엔티티 확인 완료)
 ```
 
 ### 다음 단계

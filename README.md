@@ -108,17 +108,17 @@ spring:
 
 | Domain | Entity 수 | 주요 Entity | 상태 |
 |--------|-----------|-------------|------|
-| **Common** | 1 | BaseEntity | ✅ |
+| **Common** | 2 | BaseEntity, CommonCode | ✅ |
 | **Auth** | 2 | User, UserRole | ✅ |
-| **Program** | 6 | Program, Application, Participant | ✅ |
+| **Program** | 7 | Program, Application, Participant, Category | ✅ |
 | **Mileage** | 5 | Account, Transaction, Certification | ✅ |
 | **Competency** | 6 | Survey, Question, Response, Result | ✅ |
 | **Career** | 3 | CareerPlan, Goal, Milestone | ✅ |
-| **Counseling** | 4 | Reservation, Session, Availability | ✅ |
+| **Counseling** | 5 | Reservation, Session, Availability, Counselor | ✅ |
 | **File** | 1 | FileMetadata | ✅ |
 | **Notification** | 2 | Notification, Template | ✅ |
 | **System** | 2 | SystemLog, AuditLog | ✅ |
-| **Total** | **23** | | **✅ 완료** |
+| **Total** | **26** | | **✅ 완료** |
 
 ### MSA 준비 아키텍처
 - 도메인별 패키지 분리
