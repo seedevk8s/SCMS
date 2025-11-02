@@ -1,6 +1,8 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.competency.entity;
 
+import com.university.scms.domain.auth.entity.UserRole;
 import com.university.scms.domain.common.BaseEntity;
+import com.university.scms.domain.program.entity.TargetRole;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

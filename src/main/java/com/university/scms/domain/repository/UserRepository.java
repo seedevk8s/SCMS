@@ -1,6 +1,6 @@
 package com.university.scms.domain.repository;
 
-import com.university.scms.domain.entity.User;
+import com.university.scms.domain.auth.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

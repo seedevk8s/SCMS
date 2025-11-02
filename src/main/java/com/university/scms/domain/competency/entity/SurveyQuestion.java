@@ -1,6 +1,7 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.competency.entity;
 
 import com.university.scms.domain.common.BaseEntity;
+import com.university.scms.domain.entity.QuestionType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -38,7 +39,7 @@ public class SurveyQuestion extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "question_type", nullable = false, length = 20)
-    private QuestionType questionType;
+    private com.university.scms.domain.entity.QuestionType questionType;
 
     @Column(name = "competency_category", length = 100)
     private String competencyCategory;  // 의사소통, 문제해결 등
@@ -58,7 +59,7 @@ public class SurveyQuestion extends BaseEntity {
             CompetencySurvey survey,
             Integer questionOrder,
             String questionText,
-            QuestionType questionType,
+            com.university.scms.domain.entity.QuestionType questionType,
             String competencyCategory,
             Boolean isRequired,
             String options) {
@@ -85,7 +86,7 @@ public class SurveyQuestion extends BaseEntity {
     public void update(
             Integer questionOrder,
             String questionText,
-            QuestionType questionType,
+            com.university.scms.domain.entity.QuestionType questionType,
             String competencyCategory,
             Boolean isRequired,
             String options) {
