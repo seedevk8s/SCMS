@@ -14,7 +14,7 @@ C:\Users\USER\Documents\choongang\Project\scms\scms-backend
 **Phase 1: 기반 구축** - 진행 중
 
 ### 현재 Git 브랜치
-**feature/entity-career-domain** - Career Domain Entity 작업 완료
+**main** - 도메인별 패키지 구조 리팩토링 완료
 
 ### GitHub 저장소
 ```
@@ -59,9 +59,9 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ 인덱스 전략 정의
 - ✅ MSA 전환 시나리오 문서화
 
-### 5. Entity 클래스 생성 (진행 중)
+### 5. Entity 클래스 생성 (완료) ✅
 
-#### ✅ 완료된 Entity (18개 - 78%)
+#### ✅ 완료된 Entity (26개 - 100%)
 
 ##### Auth Domain (2개)
 - ✅ **BaseEntity** - 공통 Audit 필드 (domain/common/BaseEntity.java)
@@ -169,13 +169,7 @@ https://github.com/seedevk8s/SCMS.git
   - milestoneOrder - 순서
   - 비즈니스 메서드: complete()
 
-#### ⏳ 다음 작업: File Domain (1개)
-- [ ] FileMetadata
-
-#### ⏳ 남은 Entity (5개)
-- [ ] File Domain (1개)
-- [ ] Notification Domain (2개)
-- [ ] System Domain (2개)
+#### ✅ 모든 도메인 Entity 구현 완료 (26개)
 
 ### 6. 문서화
 - ✅ README.md
@@ -197,15 +191,17 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ main 브랜치에 푸시 완료
 - ✅ ERD 설계 브랜치 생성 및 머지 (feature/phase1-erd-design)
 - ✅ Mileage & Competency Domain 브랜치 생성 및 머지 (feature/entity-mileage-domain)
-- ✅ Counseling Domain 작업용 브랜치 생성 (feature/entity-counseling-domain)
+- ✅ Counseling Domain 브랜치 생성 및 머지 (feature/entity-counseling-domain)
+- ✅ Career Domain 브랜치 생성 및 머지 (feature/entity-career-domain)
+- ✅ 도메인별 패키지 구조 리팩토링 완료 (refactor/domain-package-structure)
 
 ---
 
-## 🎯 현재 작업: Entity 클래스 생성
+## 🎯 현재 작업: Repository & Service Layer 개발 준비
 
-### 진행 상황: 18/23 완료 (78%)
+### 진행 상황: Entity Layer 100% 완료 ✅
 
-#### ✅ 완료 (18개)
+#### ✅ 완료된 Entity (26개 - 100%)
 1. ✅ BaseEntity
 2. ✅ User + UserRole
 3. ✅ Program + ProgramStatus
@@ -225,8 +221,10 @@ https://github.com/seedevk8s/SCMS.git
 17. ✅ CareerGoal
 18. ✅ CareerMilestone
 
-#### ⏳ 다음 작업: File Domain (1개)
-1. FileMetadata - 파일 메타데이터
+#### ⭐ 도메인별 패키지 구조 리팩토링 완료
+- 모든 엔티티를 도메인별 패키지로 재구성
+- MSA 전환 준비 완료
+- 패키지 구조: `domain/{domain-name}/entity/`
 
 ---
 
@@ -239,26 +237,27 @@ SCMS 프로젝트 이어서 진행하자!
 
 완료:
 - ERD 설계 완료 (23개 테이블, 9개 도메인)
-- Entity 생성: Auth, Program, Mileage, Competency, Counseling, Career Domain 완료 (18/23, 78%)
-- Git: feature/entity-career-domain 작업 완료
+- Entity Layer 100% 완료 (26개 엔티티)
+- 도메인별 패키지 구조 리팩토링 완료
+- Git: main 브랜치에 모든 작업 머지 및 푸시 완료
 
-현재 브랜치: feature/entity-career-domain
-현재 작업: Career Domain 완료, File Domain 시작 준비
-진행률: 18/23 (78%)
+현재 브랜치: main
+현재 작업: Repository & Service Layer 개발 준비
+진행률: Entity Layer 100% 완료
 
 프로젝트 위치: C:\Users\USER\Documents\choongang\Project\scms\scms-backend
 GitHub: https://github.com/seedevk8s/SCMS.git
 
-File Domain Entity 생성 시작!
+다음 단계: Repository 계층 구현 시작!
 ```
 
 ### 간단 버전
 
 ```
-SCMS Entity 작성 계속!
-완료: Auth, Program, Mileage, Competency, Counseling, Career Domain (18/23, 78%)
-다음: FileMetadata
-브랜치: feature/entity-career-domain (완료)
+SCMS Entity Layer 완료! 🎉
+완료: 모든 도메인 Entity 26개 + 리팩토링 (100%)
+다음: Repository Layer 개발
+브랜치: main
 ```
 
 ---
@@ -275,39 +274,49 @@ docs/
     └── 01-erd-design.md           # ERD 설계 (완료)
 ```
 
-### Entity 파일 (진행 중)
+### Entity 파일 (도메인별 패키지 구조) ✅
 ```
 src/main/java/com/university/scms/domain/
 ├── common/
 │   └── BaseEntity.java                           # ✅ 완료
-└── entity/
-    ├── User.java                                 # ✅ 완료
-    ├── UserRole.java                             # ✅ 완료
-    ├── Program.java                              # ✅ 완료
-    ├── ProgramStatus.java                        # ✅ 완료
-    ├── ProgramApplication.java                   # ✅ 완료
-    ├── ApplicationStatus.java                    # ✅ 완료
-    ├── ProgramParticipant.java                   # ✅ 완료
-    ├── AttendanceStatus.java                     # ✅ 완료
-    ├── MileageAccount.java                       # ✅ 완료
-    ├── MileageTransaction.java                   # ✅ 완료
-    ├── TransactionType.java                      # ✅ 완료
-    ├── CompetencyCertification.java              # ✅ 완료
-    ├── VerificationStatus.java                   # ✅ 완료
-    ├── CompetencySurvey.java                     # ✅ 완료
-    ├── TargetRole.java                           # ✅ 완료
-    ├── SurveyQuestion.java                       # ✅ 완료
-    ├── QuestionType.java                         # ✅ 완료
-    ├── SurveyResponse.java                       # ✅ 완료
-    ├── CompetencyResult.java                     # ✅ 완료
-    ├── CounselingStatus.java                     # ✅ 완료 ⭐ NEW
-    ├── CounselingReservation.java                # ✅ 완료 ⭐ NEW
-    ├── CounselingSession.java                    # ✅ 완료
-    ├── CounselorAvailability.java                # ✅ 완료
-    ├── CareerPlan.java                           # ✅ 완료
-    ├── CareerGoal.java                           # ✅ 완료
-    ├── CareerMilestone.java                      # ✅ 완료
-    └── FileMetadata.java                         # ⏳ 다음
+├── auth/
+│   └── entity/
+│       ├── User.java                             # ✅ 완료
+│       └── UserRole.java                         # ✅ 완료
+├── program/
+│   └── entity/
+│       ├── Program.java                          # ✅ 완료
+│       ├── ProgramApplication.java               # ✅ 완료
+│       ├── ProgramParticipant.java               # ✅ 완료
+│       ├── ProgramStatus.java                    # ✅ 완료
+│       ├── ApplicationStatus.java                # ✅ 완료
+│       ├── AttendanceStatus.java                 # ✅ 완료
+│       └── TargetRole.java                       # ✅ 완료
+├── mileage/
+│   └── entity/
+│       ├── MileageAccount.java                   # ✅ 완료
+│       ├── MileageTransaction.java               # ✅ 완료
+│       └── TransactionType.java                  # ✅ 완료
+├── competency/
+│   └── entity/
+│       ├── CompetencyCertification.java          # ✅ 완료
+│       ├── CompetencySurvey.java                 # ✅ 완료
+│       ├── CompetencyResult.java                 # ✅ 완료
+│       ├── SurveyQuestion.java                   # ✅ 완료
+│       ├── SurveyResponse.java                   # ✅ 완료
+│       ├── VerificationStatus.java               # ✅ 완료
+│       └── QuestionType.java                     # ✅ 완료
+├── counseling/
+│   └── entity/
+│       ├── CounselingReservation.java            # ✅ 완료
+│       ├── CounselingSession.java                # ✅ 완료
+│       ├── CounselorAvailability.java            # ✅ 완료
+│       └── CounselingStatus.java                 # ✅ 완료
+└── career/
+    └── entity/
+        ├── CareerPlan.java                       # ✅ 완료
+        ├── CareerGoal.java                       # ✅ 완료
+        └── CareerMilestone.java                  # ✅ 완료
 ```
 
 ---
@@ -323,25 +332,18 @@ src/main/java/com/university/scms/domain/
 - [x] Git 저장소 초기화
 - [x] **ERD 설계 완료** (23개 테이블)
 - [x] **JPA 전략 확정** (하이브리드)
-- [x] **BaseEntity 생성**
-- [x] **Auth Domain Entity 완성**
-- [x] **Program Domain Entity 완성**
-- [x] **Mileage Domain Entity 완성**
-- [x] **Competency Domain Entity 완성**
-- [x] **Counseling Domain Entity 완성** ⭐ NEW
-
-### 🔄 진행 중
-- [ ] **Entity 클래스 작성** ← 현재 단계 (18/23 완료, 78%)
+- [x] **Entity Layer 100% 완료** (26개 엔티티) ✅
   - [x] BaseEntity
   - [x] Auth Domain (2개)
-  - [x] Program Domain (3개)
-  - [x] Mileage Domain (3개)
-  - [x] Competency Domain (4개)
-  - [x] Counseling Domain (3개)
-  - [x] Career Domain (3개) ⭐ 완료
-  - [ ] File Domain (1개) ← 다음 작업
-  - [ ] Notification Domain (2개)
-  - [ ] System Domain (2개)
+  - [x] Program Domain (3개 + 4개 Enum)
+  - [x] Mileage Domain (3개 + 1개 Enum)
+  - [x] Competency Domain (4개 + 3개 Enum)
+  - [x] Counseling Domain (3개 + 1개 Enum)
+  - [x] Career Domain (3개)
+- [x] **도메인별 패키지 구조 리팩토링 완료** ⭐ NEW
+
+### 🔄 진행 중
+- [ ] **Repository 계층 구현** ← 다음 단계
 
 ### ⏳ 예정
 - [ ] Repository 작성
@@ -352,40 +354,40 @@ src/main/java/com/university/scms/domain/
 
 ---
 
-## 🚀 Entity 생성 진행 순서
+## 🚀 Entity Layer 완료 현황
 
-### ✅ 완료 (18개 - 78%)
-- [x] BaseEntity
+### ✅ 완료 (26개 - 100%) 🎉
+
+#### Auth Domain (2개)
 - [x] User, UserRole
-- [x] Program, ProgramStatus
-- [x] ProgramApplication, ApplicationStatus
-- [x] ProgramParticipant, AttendanceStatus
-- [x] MileageAccount, TransactionType
-- [x] MileageTransaction
-- [x] CompetencyCertification, VerificationStatus
-- [x] CompetencySurvey, TargetRole
-- [x] SurveyQuestion, QuestionType
-- [x] SurveyResponse
-- [x] CompetencyResult
-- [x] CounselingReservation, CounselingStatus
-- [x] CounselingSession
-- [x] CounselorAvailability
-- [x] CareerPlan
-- [x] CareerGoal
-- [x] CareerMilestone
 
-### ⏳ 다음 단계
+#### Program Domain (7개)
+- [x] Program, ProgramApplication, ProgramParticipant
+- [x] ProgramStatus, ApplicationStatus, AttendanceStatus, TargetRole
 
-#### 1. File Domain (1개) ← 현재 위치
-- [ ] FileMetadata
+#### Mileage Domain (3개)
+- [x] MileageAccount, MileageTransaction, TransactionType
 
-#### 2. Notification Domain (2개)
-- [ ] Notification
-- [ ] NotificationTemplate
+#### Competency Domain (7개)
+- [x] CompetencyCertification, CompetencySurvey, CompetencyResult
+- [x] SurveyQuestion, SurveyResponse
+- [x] VerificationStatus, QuestionType
 
-#### 3. System Domain (2개)
-- [ ] SystemLog
-- [ ] AuditLog
+#### Counseling Domain (4개)
+- [x] CounselingReservation, CounselingSession, CounselorAvailability
+- [x] CounselingStatus
+
+#### Career Domain (3개)
+- [x] CareerPlan, CareerGoal, CareerMilestone
+
+### ⭐ 리팩토링 완료
+- [x] 도메인별 패키지 구조로 재구성
+- [x] MSA 전환 준비 완료
+
+### ⏳ 다음 단계: Repository Layer
+- [ ] 도메인별 Repository 인터페이스 구현
+- [ ] 기본 CRUD 메서드 정의
+- [ ] Custom Query 메서드 추가
 
 ---
 
@@ -408,7 +410,7 @@ src/main/java/com/university/scms/domain/
 - **Base URL**: http://localhost:8080
 
 ### Git
-- **현재 브랜치**: feature/entity-mileage-domain
+- **현재 브랜치**: main
 - **저장소**: https://github.com/seedevk8s/SCMS.git
 
 ---
@@ -427,12 +429,13 @@ src/main/java/com/university/scms/domain/
 ---
 
 **작성일**: 2025-01-XX  
-**다음 작업**: File Domain Entity 생성 (1개)  
-**예상 소요시간**: Entity 5개 남음  
-**최종 업데이트**: 2025-01-XX (Career Domain 완성, File Domain 시작 준비)
+**다음 작업**: Repository Layer 구현  
+**Phase 1 진행률**: Entity Layer 100% 완료  
+**최종 업데이트**: 2025-11-02 (도메인별 패키지 구조 리팩토링 완료)
 
 ---
 
 **세션을 재개할 준비가 되었습니다! 🚀**
-**진행률: 18/23 Entity 완료 (78%)**
-**현재 브랜치: feature/entity-career-domain**
+**진행률: Entity Layer 100% 완료 🎉**
+**현재 브랜치: main**
+**다음 단계: Repository Layer 개발**
