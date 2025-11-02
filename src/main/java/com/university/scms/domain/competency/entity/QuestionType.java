@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.competency.entity;
 
 public enum QuestionType {
     SINGLE_CHOICE,    // 단일 선택
