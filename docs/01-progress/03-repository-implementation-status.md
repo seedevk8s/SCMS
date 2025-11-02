@@ -108,33 +108,34 @@ boolean existsByXxx(Type xxx);
 |------|-----------|--------|----------------|
 | 2025-11-02 | Auth Domain Repository | feature/repository-auth | 1개 (UserRepository) |
 | 2025-11-02 | Common Domain Repository | feature/repository-common | 1개 (CommonCodeRepository) |
-| 2025-11-02 | Program Domain Repository (4개) | feature/repository-program-phase2 | 4개 (Application, Participant, Satisfaction, Category) |
+| 2025-11-02 | Program Domain Repository (4개) | feature/repository-phase2-2-program | 4개 (Application, Participant, Satisfaction, Category) |
+| 2025-11-02 | Program Domain Repository 테스트 (4개) | feature/repository-phase2-2-program | 테스트 200개 작성 및 통과 |
 
 ---
 
 ## 🧪 테스트 현황
 
-### ✅ 완료된 테스트 (2개)
+### ✅ 완료된 테스트 (6개)
 - UserRepositoryTest: 22개 테스트 케이스
 - CommonCodeRepositoryTest: 27개 테스트 케이스
+- ProgramApplicationRepositoryTest: 31개 테스트 케이스
+- ProgramParticipantRepositoryTest: 39개 테스트 케이스
+- ProgramSatisfactionRepositoryTest: 41개 테스트 케이스
+- ProgramCategoryRepositoryTest: 40개 테스트 케이스
 
-### ⏳ 작성 대기 중 (4개)
-- ProgramApplicationRepositoryTest
-- ProgramParticipantRepositoryTest  
-- ProgramSatisfactionRepositoryTest
-- ProgramCategoryRepositoryTest
+**총 테스트: 200개**
 
 ---
 
 ## 🚀 다음 단계
 
 ### Phase 2 완료 (Program Domain)
-1. ✅ ProgramApplicationRepository
-2. ✅ ProgramParticipantRepository
-3. ✅ ProgramSatisfactionRepository
-4. ✅ ProgramCategoryRepository
-5. ⏳ ProgramCompetencyRepository
-6. ⏳ 테스트 작성 (4개)
+1. ✅ ProgramApplicationRepository (테스트 31개)
+2. ✅ ProgramParticipantRepository (테스트 39개)
+3. ✅ ProgramSatisfactionRepository (테스트 41개)
+4. ✅ ProgramCategoryRepository (테스트 40개)
+5. ⏳ ProgramRepository (테스트 작성)
+6. ⏳ ProgramCompetencyRepository
 
 ### Phase 3: Mileage Domain
 - MileageTransactionRepository
@@ -162,27 +163,27 @@ boolean existsByXxx(Type xxx);
 - [x] 통계/집계 메서드
 - [x] 존재 여부 확인
 - [x] 커스텀 쿼리 (@Query)
-- [ ] 테스트 작성 (⏳ 진행 예정)
-- [ ] 테스트 통과 확인
+- [x] 테스트 작성 (Program Domain 4개 완료)
+- [x] 테스트 통과 확인 (200개 테스트)
 
 ---
 
 ## 💾 현재 커밋 상태
 
 ### 작업 브랜치
-- `feature/repository-program-phase2`
+- `feature/repository-phase2-2-program`
 
-### 커밋 대기 중인 파일
-1. ProgramApplicationRepository.java
-2. ProgramParticipantRepository.java
-3. ProgramSatisfactionRepository.java
-4. ProgramCategoryRepository.java
+### 최근 커밋 (2025-11-02)
+1. ProgramApplicationRepositoryTest.java (31개 테스트)
+2. ProgramParticipantRepositoryTest.java (39개 테스트)
+3. ProgramSatisfactionRepositoryTest.java (41개 테스트)
+4. ProgramCategoryRepositoryTest.java (40개 테스트)
 5. 문서: 03-repository-implementation-status.md
 
-### 다음 커밋 예정
-- 4개 Repository 테스트 파일
-- 테스트 통과 확인
-- main 브랜치 머지
+### 다음 작업
+- ProgramRepository 테스트 작성
+- ProgramCompetencyRepository 구현 및 테스트
+- Mileage Domain 시작
 
 ---
 
