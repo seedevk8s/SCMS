@@ -53,6 +53,9 @@ public class SurveyQuestion extends BaseEntity {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<SurveyResponse> responses = new ArrayList<>();
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AssessmentOption> assessmentOptions = new ArrayList<>();
+
     // === 생성 메서드 ===
     
     public static SurveyQuestion create(

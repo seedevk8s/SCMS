@@ -88,6 +88,10 @@ public class Program extends BaseEntity {
     @Builder.Default
     private List<ProgramParticipant> participants = new ArrayList<>();
 
+    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ProgramCompetency> programCompetencies = new ArrayList<>();
+
     // ========== 비즈니스 메서드 ==========
 
     /**
