@@ -52,19 +52,21 @@ https://github.com/seedevk8s/SCMS.git
 
 ### 5. Entity 클래스 생성 - 100% 완료! ✅
 
-#### ✅ 완료된 Entity (23개 - 100%)
+#### ✅ 완료된 Entity (26개 - 100%)
 
-##### Common (1개)
+##### Common (2개)
 - ✅ **BaseEntity** - 공통 Audit 필드 (createdAt, updatedAt)
+- ✅ **CommonCode** - 공통 코드 관리 ⭐ NEW
 
 ##### Auth Domain (2개)
 - ✅ **User** - 사용자 엔티티 (학생, 교직원, 관리자)
 - ✅ **UserRole** - 역할 enum
 
-##### Program Domain (6개: 3 Entity + 3 Enum)
+##### Program Domain (7개: 4 Entity + 3 Enum)
 - ✅ **Program** - 비교과 프로그램
 - ✅ **ProgramApplication** - 프로그램 신청
 - ✅ **ProgramParticipant** - 프로그램 참여자
+- ✅ **ProgramCategory** - 프로그램 카테고리 ⭐ NEW
 - ✅ **ProgramStatus**, **ApplicationStatus**, **AttendanceStatus** - Enum
 
 ##### Mileage Domain (5개: 3 Entity + 2 Enum)
@@ -80,25 +82,26 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ **CompetencyResult** - 진단 결과
 - ✅ **TargetRole**, **QuestionType** - Enum
 
-##### Career Domain (3개) ⭐ NEW
+##### Career Domain (3개) 
 - ✅ **CareerPlan** - 진로 계획
 - ✅ **CareerGoal** - 진로 목표
 - ✅ **CareerMilestone** - 진로 마일스톤
 
-##### Counseling Domain (4개: 3 Entity + 1 Enum)
+##### Counseling Domain (5개: 4 Entity + 1 Enum)
 - ✅ **CounselingReservation** - 상담 예약
 - ✅ **CounselingSession** - 상담 세션
 - ✅ **CounselorAvailability** - 상담사 가용 시간
+- ✅ **Counselor** - 상담사 정보 ⭐ NEW
 - ✅ **CounselingStatus** - Enum
 
-##### File Domain (1개) ⭐ NEW
+##### File Domain (1개)
 - ✅ **FileMetadata** - 파일 메타데이터
 
-##### Notification Domain (2개) ⭐ NEW
+##### Notification Domain (2개)
 - ✅ **Notification** - 알림
 - ✅ **NotificationTemplate** - 알림 템플릿
 
-##### System Domain (2개) ⭐ NEW
+##### System Domain (2개)
 - ✅ **SystemLog** - 시스템 로그
 - ✅ **AuditLog** - 감사 로그
 - ✅ **CompetencyCertification** - 역량 인증

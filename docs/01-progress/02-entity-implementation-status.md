@@ -1,13 +1,17 @@
 # Entity 구현 진행 상황
 
-## 📊 전체 진행률: 100% (23/23) ✅ 완료!
+## 📊 전체 진행률: 100% (26/26) ✅ 완료!
 
-### ✅ 완료된 Entity (23개)
+### ✅ 완료된 Entity (26개)
 
-#### 1. Core Infrastructure (1개)
-- **BaseEntity**: 공통 감사 필드 (createdAt, createdBy, updatedAt, updatedBy)
+#### 1. Core Infrastructure (2개)
+- **BaseEntity**: 공통 감사 필드 (createdAt, updatedAt)
   - 모든 Entity의 기본 클래스
-  - 생성/수정 시간 및 작업자 추적
+  - 생성/수정 시간 추적
+- **CommonCode**: 공통 코드 관리 ⭐ NEW
+  - 코드 그룹별 관리
+  - 계층 구조 지원
+  - 시스템 코드 보호
 
 ---
 
@@ -23,14 +27,15 @@
 
 ---
 
-#### 3. Program Domain (6개)
+#### 3. Program Domain (7개)
 
-##### Entities (3개)
+##### Entities (4개)
 | Entity | 설명 | 주요 필드 | 관계 |
 |--------|------|-----------|------|
 | Program | 프로그램 정보 | name, description, status, capacity | applications (OneToMany), participants (OneToMany) |
 | ProgramApplication | 프로그램 신청 | userId, applicationDate, status | program (ManyToOne) |
 | ProgramParticipant | 프로그램 참가자 | userId, attendanceStatus | program (ManyToOne) |
+| ProgramCategory | 프로그램 카테고리 | name, description, parentId | - | ⭐ NEW
 
 ##### Enums (3개)
 - **ProgramStatus**: 프로그램 상태 (PLANNED, RECRUITING, IN_PROGRESS, COMPLETED, CANCELLED)
@@ -103,14 +108,15 @@
 
 ---
 
-#### 7. Counseling Domain (4개)
+#### 7. Counseling Domain (5개)
 
-##### Entities (3개)
+##### Entities (4개)
 | Entity | 설명 | 주요 필드 | 관계 |
 |--------|------|-----------|------|
 | CounselingReservation | 상담 예약 | studentId, counselorId, reservationDate, status | sessions (OneToMany) |
 | CounselingSession | 상담 세션 | startTime, endTime, sessionNotes, followUpRequired | reservation (ManyToOne) |
 | CounselorAvailability | 상담사 가용 시간 | counselorId, dayOfWeek, startTime, endTime | - |
+| Counselor | 상담사 정보 | userId, specialty, introduction, availableDays | - | ⭐ NEW
 
 ##### Enums (1개)
 - **CounselingStatus**: 예약 상태 (PENDING, CONFIRMED, CANCELLED, COMPLETED)
@@ -182,17 +188,17 @@
 
 | Domain | Entity 수 | 상태 | 주요 기능 |
 |--------|-----------|------|-----------|
-| Common | 1 | ✅ | BaseEntity (감사 필드) |
+| Common | 2 | ✅ | BaseEntity, CommonCode |
 | Auth | 2 | ✅ | 사용자 인증/권한 |
-| Program | 6 | ✅ | 프로그램 신청/관리 |
+| Program | 7 | ✅ | 프로그램 신청/관리/카테고리 |
 | Mileage | 5 | ✅ | 마일리지 적립/사용 |
 | Competency | 6 | ✅ | 역량 진단 설문 |
 | Career | 3 | ✅ | 진로 계획 수립 |
-| Counseling | 4 | ✅ | 상담 예약/세션 |
+| Counseling | 5 | ✅ | 상담 예약/세션/상담사 |
 | File | 1 | ✅ | 파일 메타데이터 |
 | Notification | 2 | ✅ | 알림 관리 |
 | System | 2 | ✅ | 로그/감사 |
-| **Total** | **23** | **✅** | **전체 완료** |
+| **Total** | **26** | **✅** | **전체 완료** |
 
 ---
 
@@ -227,7 +233,8 @@
 | 2025-10-31 | Competency Domain 구현 | feature/entity-competency-domain | 6개 (Competency Domain 전체) |
 | 2025-10-31 | Counseling Domain 구현 | feature/entity-counseling-domain | 4개 (Counseling Domain 전체) |
 | 2025-10-31 | Career Domain 구현 | feature/entity-career-domain | 3개 (Career Domain 전체) |
-| 2025-11-02 | 나머지 Domain 구현 | feature/entity-remaining-domains | 8개 (File, Notification, System) ⭐ 완료 |
+| 2025-11-02 | 나머지 Domain 구현 | feature/entity-remaining-domains | 8개 (File, Notification, System) |
+| 2025-11-02 | 필수 ERD 엔티티 확인 | feature/entity-essential-missing | 3개 (Counselor, CommonCode, ProgramCategory) ⭐ 완료 |
 
 ---
 
