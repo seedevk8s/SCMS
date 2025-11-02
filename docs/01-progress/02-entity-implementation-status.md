@@ -1,8 +1,8 @@
 # Entity 구현 진행 상황
 
-## 📊 전체 진행률: 100% (26/26) ✅ 완료!
+## 📊 전체 진행률: 100% (30/30) ✅ 완료!
 
-### ✅ 완료된 Entity (26개)
+### ✅ 완료된 Entity (30개)
 
 #### 1. Core Infrastructure (2개)
 - **BaseEntity**: 공통 감사 필드 (createdAt, updatedAt)
@@ -27,15 +27,17 @@
 
 ---
 
-#### 3. Program Domain (7개)
+#### 3. Program Domain (9개)
 
-##### Entities (4개)
+##### Entities (6개)
 | Entity | 설명 | 주요 필드 | 관계 |
 |--------|------|-----------|------|
-| Program | 프로그램 정보 | name, description, status, capacity | applications (OneToMany), participants (OneToMany) |
+| Program | 프로그램 정보 | name, description, status, capacity | applications (OneToMany), participants (OneToMany), competencies (OneToMany), satisfactions (OneToMany) |
 | ProgramApplication | 프로그램 신청 | userId, applicationDate, status | program (ManyToOne) |
 | ProgramParticipant | 프로그램 참가자 | userId, attendanceStatus | program (ManyToOne) |
 | ProgramCategory | 프로그램 카테고리 | name, description, parentId | - | ⭐ NEW
+| ProgramCompetency | 프로그램-역량 매핑 | competencyId, weight, description | program (ManyToOne) | 🆕 추가
+| ProgramSatisfaction | 프로그램 만족도 | userId, overallRating, contentRating, strengths | program (ManyToOne) | 🆕 추가
 
 ##### Enums (3개)
 - **ProgramStatus**: 프로그램 상태 (PLANNED, RECRUITING, IN_PROGRESS, COMPLETED, CANCELLED)
@@ -69,15 +71,16 @@
 
 ---
 
-#### 5. Competency Domain (6개)
+#### 5. Competency Domain (7개)
 
-##### Entities (4개)
+##### Entities (5개)
 | Entity | 설명 | 주요 필드 | 관계 |
 |--------|------|-----------|------|
 | CompetencySurvey | 역량 진단 설문 | title, description, targetRole, isActive | questions (OneToMany), responses (OneToMany), results (OneToMany) |
-| SurveyQuestion | 설문 문항 | survey, questionText, questionType, options | survey (ManyToOne) |
+| SurveyQuestion | 설문 문항 | survey, questionText, questionType, options | survey (ManyToOne), assessmentOptions (OneToMany) |
 | SurveyResponse | 설문 응답 | userId, responseText, submittedAt | survey (ManyToOne), question (ManyToOne) |
 | CompetencyResult | 진단 결과 | userId, totalScore, categoryScores | survey (ManyToOne) |
+| AssessmentOption | 진단 선택지 | optionOrder, optionText, optionValue, isCorrect | question (ManyToOne) | 🆕 추가
 
 ##### Enums (2개)
 - **TargetRole**: 설문 대상 (STUDENT, STAFF, ALL)
@@ -108,15 +111,16 @@
 
 ---
 
-#### 7. Counseling Domain (5개)
+#### 7. Counseling Domain (6개)
 
-##### Entities (4개)
+##### Entities (5개)
 | Entity | 설명 | 주요 필드 | 관계 |
 |--------|------|-----------|------|
 | CounselingReservation | 상담 예약 | studentId, counselorId, reservationDate, status | sessions (OneToMany) |
-| CounselingSession | 상담 세션 | startTime, endTime, sessionNotes, followUpRequired | reservation (ManyToOne) |
+| CounselingSession | 상담 세션 | startTime, endTime, sessionNotes, followUpRequired | reservation (ManyToOne), satisfactions (OneToMany) |
 | CounselorAvailability | 상담사 가용 시간 | counselorId, dayOfWeek, startTime, endTime | - |
 | Counselor | 상담사 정보 | userId, specialty, introduction, availableDays | - | ⭐ NEW
+| CounselingSatisfaction | 상담 만족도 | userId, overallRating, counselorRating, strengths | counselingSession (ManyToOne) | 🆕 추가
 
 ##### Enums (1개)
 - **CounselingStatus**: 예약 상태 (PENDING, CONFIRMED, CANCELLED, COMPLETED)
@@ -190,15 +194,15 @@
 |--------|-----------|------|-----------|
 | Common | 2 | ✅ | BaseEntity, CommonCode |
 | Auth | 2 | ✅ | 사용자 인증/권한 |
-| Program | 7 | ✅ | 프로그램 신청/관리/카테고리 |
+| Program | 9 | ✅ | 프로그램 신청/관리/카테고리/역량매핑/만족도 |
 | Mileage | 5 | ✅ | 마일리지 적립/사용 |
-| Competency | 6 | ✅ | 역량 진단 설문 |
+| Competency | 7 | ✅ | 역량 진단 설문/선택지 |
 | Career | 3 | ✅ | 진로 계획 수립 |
-| Counseling | 5 | ✅ | 상담 예약/세션/상담사 |
+| Counseling | 6 | ✅ | 상담 예약/세션/상담사/만족도 |
 | File | 1 | ✅ | 파일 메타데이터 |
 | Notification | 2 | ✅ | 알림 관리 |
 | System | 2 | ✅ | 로그/감사 |
-| **Total** | **26** | **✅** | **전체 완료** |
+| **Total** | **30** | **✅** | **전체 완료** |
 
 ---
 
@@ -235,6 +239,7 @@
 | 2025-10-31 | Career Domain 구현 | feature/entity-career-domain | 3개 (Career Domain 전체) |
 | 2025-11-02 | 나머지 Domain 구현 | feature/entity-remaining-domains | 8개 (File, Notification, System) |
 | 2025-11-02 | 필수 ERD 엔티티 확인 | feature/entity-essential-missing | 3개 (Counselor, CommonCode, ProgramCategory) ⭐ 완료 |
+| 2025-11-02 | 권장 추가 엔티티 구현 | feature/additional-entities | 4개 (ProgramCompetency, AssessmentOption, ProgramSatisfaction, CounselingSatisfaction) 🆕 완료 |
 
 ---
 

@@ -52,7 +52,7 @@ https://github.com/seedevk8s/SCMS.git
 
 ### 5. Entity 클래스 생성 - 100% 완료! ✅
 
-#### ✅ 완료된 Entity (26개 - 100%)
+#### ✅ 완료된 Entity (30개 - 100%)
 
 ##### Common (2개)
 - ✅ **BaseEntity** - 공통 Audit 필드 (createdAt, updatedAt)
@@ -62,11 +62,13 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ **User** - 사용자 엔티티 (학생, 교직원, 관리자)
 - ✅ **UserRole** - 역할 enum
 
-##### Program Domain (7개: 4 Entity + 3 Enum)
+##### Program Domain (9개: 6 Entity + 3 Enum)
 - ✅ **Program** - 비교과 프로그램
 - ✅ **ProgramApplication** - 프로그램 신청
 - ✅ **ProgramParticipant** - 프로그램 참여자
 - ✅ **ProgramCategory** - 프로그램 카테고리 ⭐ NEW
+- ✅ **ProgramCompetency** - 프로그램-역량 매핑 🆕 추가
+- ✅ **ProgramSatisfaction** - 프로그램 만족도 🆕 추가
 - ✅ **ProgramStatus**, **ApplicationStatus**, **AttendanceStatus** - Enum
 
 ##### Mileage Domain (5개: 3 Entity + 2 Enum)
@@ -75,11 +77,12 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ **CompetencyCertification** - 역량 인증 기록
 - ✅ **TransactionType**, **VerificationStatus** - Enum
 
-##### Competency Domain (6개: 4 Entity + 2 Enum)
+##### Competency Domain (7개: 5 Entity + 2 Enum)
 - ✅ **CompetencySurvey** - 역량 진단 설문
 - ✅ **SurveyQuestion** - 설문 문항
 - ✅ **SurveyResponse** - 설문 응답
 - ✅ **CompetencyResult** - 진단 결과
+- ✅ **AssessmentOption** - 진단 선택지 🆕 추가
 - ✅ **TargetRole**, **QuestionType** - Enum
 
 ##### Career Domain (3개) 
@@ -87,11 +90,12 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ **CareerGoal** - 진로 목표
 - ✅ **CareerMilestone** - 진로 마일스톤
 
-##### Counseling Domain (5개: 4 Entity + 1 Enum)
+##### Counseling Domain (6개: 5 Entity + 1 Enum)
 - ✅ **CounselingReservation** - 상담 예약
 - ✅ **CounselingSession** - 상담 세션
 - ✅ **CounselorAvailability** - 상담사 가용 시간
 - ✅ **Counselor** - 상담사 정보 ⭐ NEW
+- ✅ **CounselingSatisfaction** - 상담 만족도 🆕 추가
 - ✅ **CounselingStatus** - Enum
 
 ##### File Domain (1개)
@@ -208,7 +212,7 @@ https://github.com/seedevk8s/SCMS.git
 
 ### 진행 상황: Entity Layer 100% 완료 ✅
 
-#### ✅ 완료된 Entity (26개 - 100%)
+#### ✅ 완료된 Entity (30개 - 100%)
 1. ✅ BaseEntity
 2. ✅ User + UserRole
 3. ✅ Program + ProgramStatus
