@@ -19,20 +19,50 @@ scms/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/university/scms/
-│   │   │   ├── config/          # 설정 클래스
-│   │   │   ├── controller/      # REST API 컨트롤러
+│   │   │   ├── config/              # 설정 클래스
+│   │   │   ├── controller/          # REST API 컨트롤러
 │   │   │   ├── domain/
-│   │   │   │   ├── entity/      # JPA 엔티티
-│   │   │   │   └── repository/  # JPA 리포지토리
-│   │   │   ├── dto/             # 데이터 전송 객체
-│   │   │   ├── service/         # 비즈니스 로직
-│   │   │   ├── security/        # 보안 관련 (JWT, Filter 등)
-│   │   │   ├── util/            # 유틸리티
-│   │   │   └── exception/       # 예외 처리
+│   │   │   │   ├── common/          # BaseEntity 등 공통 클래스
+│   │   │   │   ├── auth/           
+│   │   │   │   │   ├── entity/      # User, UserRole
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── program/        
+│   │   │   │   │   ├── entity/      # Program, Application, Participant
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── mileage/        
+│   │   │   │   │   ├── entity/      # MileageAccount, Transaction, Certification
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── competency/     
+│   │   │   │   │   ├── entity/      # Survey, Question, Response, Result
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── career/         
+│   │   │   │   │   ├── entity/      # CareerPlan, Goal, Milestone
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── counseling/     
+│   │   │   │   │   ├── entity/      # Reservation, Session, Availability
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── file/           
+│   │   │   │   │   ├── entity/      # FileMetadata
+│   │   │   │   │   └── repository/
+│   │   │   │   ├── notification/   
+│   │   │   │   │   ├── entity/      # Notification, NotificationTemplate
+│   │   │   │   │   └── repository/
+│   │   │   │   └── system/         
+│   │   │   │       ├── entity/      # SystemLog, AuditLog
+│   │   │   │       └── repository/
+│   │   │   ├── dto/                 # 데이터 전송 객체
+│   │   │   ├── service/             # 비즈니스 로직
+│   │   │   ├── security/            # 보안 관련 (JWT, Filter 등)
+│   │   │   ├── util/                # 유틸리티
+│   │   │   └── exception/           # 예외 처리
 │   │   └── resources/
-│   │       └── application.yml  # 애플리케이션 설정
-│   └── test/                    # 테스트 코드
-└── build.gradle                 # Gradle 설정
+│   │       └── application.yml      # 애플리케이션 설정
+│   └── test/                        # 테스트 코드
+├── docs/                            # 프로젝트 문서
+│   ├── 01-progress/                 # 진행 상황
+│   ├── 02-design/                   # 설계 문서
+│   └── 03-workflow/                 # 작업 흐름
+└── build.gradle                     # Gradle 설정
 ```
 
 ## 🔧 개발 환경 설정
@@ -72,26 +102,58 @@ spring:
 
 또는 IntelliJ IDEA에서 `ScmsApplication` 클래스의 main 메서드를 직접 실행
 
+## 📊 Entity 구현 현황 (100% 완료) ✅
+
+### Domain별 Entity 구성
+
+| Domain | Entity 수 | 주요 Entity | 상태 |
+|--------|-----------|-------------|------|
+| **Common** | 1 | BaseEntity | ✅ |
+| **Auth** | 2 | User, UserRole | ✅ |
+| **Program** | 6 | Program, Application, Participant | ✅ |
+| **Mileage** | 5 | Account, Transaction, Certification | ✅ |
+| **Competency** | 6 | Survey, Question, Response, Result | ✅ |
+| **Career** | 3 | CareerPlan, Goal, Milestone | ✅ |
+| **Counseling** | 4 | Reservation, Session, Availability | ✅ |
+| **File** | 1 | FileMetadata | ✅ |
+| **Notification** | 2 | Notification, Template | ✅ |
+| **System** | 2 | SystemLog, AuditLog | ✅ |
+| **Total** | **23** | | **✅ 완료** |
+
+### MSA 준비 아키텍처
+- 도메인별 패키지 분리
+- ID 기반 참조 (외래키 제약조건 없음)
+- 동일 도메인 내에서만 JPA 관계 매핑
+- Rich Domain Model 패턴 적용
+
 ## 📋 주요 기능 모듈
 
-### Phase 1: 기반 구축
+### Phase 1: 기반 구축 ✅
 - [x] 프로젝트 초기 설정
-- [ ] 데이터베이스 설계 (ERD)
+- [x] 데이터베이스 설계 (ERD)
+- [x] Entity 레이어 구현 (23개 Entity 완료)
 - [ ] JWT 인증/인가 시스템
 
-### Phase 2: 핵심 기능
+### Phase 2: Repository & Service 레이어
+- [ ] Repository 인터페이스 구현
+- [ ] Service 비즈니스 로직 구현
+- [ ] DTO 클래스 작성
+
+### Phase 3: Controller & API
+- [ ] REST API Controller 구현
+- [ ] 예외 처리 및 Validation
+- [ ] API 문서화 (Swagger)
+
+### Phase 4: 핵심 기능 구현
 - [ ] 사용자 관리 (마이페이지)
 - [ ] 비교과 프로그램 관리
 - [ ] 마일리지 시스템
-
-### Phase 3: 부가 기능
 - [ ] 역량 진단 시스템
 - [ ] 상담 시스템
-- [ ] 관리자 대시보드
+- [ ] 진로 관리 시스템
 
-### Phase 4: 마무리
+### Phase 5: 마무리
 - [ ] 테스트 코드 작성
-- [ ] API 문서화
 - [ ] 배포 준비
 
 ## 🔐 보안

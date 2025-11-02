@@ -151,28 +151,27 @@ Git 사용 규칙 및 이력
 
 ## 📊 현재 프로젝트 상태 요약
 
-### 진행률: 65% (15/23 Entity)
+### 진행률: 100% (23/23 Entity) ✅ 완료!
 
-**✅ 완료 (15개)**
+**✅ 완료 (23개)**
 - Core: BaseEntity (1)
 - Auth Domain: User + UserRole (2)
 - Program Domain: Program, Application, Participant + 3 Enum (6)
 - Mileage Domain: Account, Transaction, Certification + 2 Enum (5)
 - Competency Domain: Survey, Question, Response, Result + 2 Enum (6)
+- Career Domain: Plan, Goal, Milestone (3) ⭐ NEW
 - Counseling Domain: Reservation, Session, Availability + Status (4) ⭐ NEW
-
-**🔄 작업 중 (3개)**
-- Career Domain: Plan, Goal, Milestone
-
-**⏳ 예정 (5개)**
-- File Domain (1)
-- Notification Domain (2)
-- System Domain (2)
+- File Domain: FileMetadata (1) ⭐ NEW
+- Notification Domain: Notification, Template (2) ⭐ NEW
+- System Domain: SystemLog, AuditLog (2) ⭐ NEW
 
 ### 현재 브랜치
 ```
-feature/entity-counseling-domain
+main (entity 레이어 완료)
 ```
+
+### 다음 단계
+**Repository 레이어 구현 시작**
 
 ---
 

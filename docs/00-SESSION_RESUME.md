@@ -45,58 +45,62 @@ https://github.com/seedevk8s/SCMS.git
   - 도메인 간: ID만 참조 (JPA 관계 없음)
 
 ### 4. ERD 설계 ✅
-- ✅ 전체 도메인 테이블 설계 완료 (23개 테이블, 9개 도메인)
-- ✅ Auth Domain (1개 테이블)
-- ✅ Program Domain (3개 테이블)
-- ✅ Mileage Domain (3개 테이블)
-- ✅ Competency Domain (4개 테이블)
-- ✅ Counseling Domain (3개 테이블)
-- ✅ **Career Domain 추가** (3개 테이블) - Portfolio, JobPosting, JobBookmark
-- ✅ **File Domain 추가** (1개 테이블) - Files
-- ✅ **Notification Domain 추가** (2개 테이블) - Notification, EmailLog
-- ✅ **System Domain 추가** (1개 테이블) - AccessLog
-- ✅ ERD 다이어그램 작성 (Mermaid)
+- ✅ 전체 도메인 테이블 설계 완료 (23개 테이블, 10개 도메인)
+- ✅ ERD 다이어그램 작성
 - ✅ 인덱스 전략 정의
 - ✅ MSA 전환 시나리오 문서화
 
-### 5. Entity 클래스 생성 (완료) ✅
+### 5. Entity 클래스 생성 - 100% 완료! ✅
 
-#### ✅ 완료된 Entity (26개 - 100%)
+#### ✅ 완료된 Entity (23개 - 100%)
+
+##### Common (1개)
+- ✅ **BaseEntity** - 공통 Audit 필드 (createdAt, updatedAt)
 
 ##### Auth Domain (2개)
-- ✅ **BaseEntity** - 공통 Audit 필드 (domain/common/BaseEntity.java)
 - ✅ **User** - 사용자 엔티티 (학생, 교직원, 관리자)
 - ✅ **UserRole** - 역할 enum
 
-##### Program Domain (3개 Entity + 3개 Enum)
+##### Program Domain (6개: 3 Entity + 3 Enum)
 - ✅ **Program** - 비교과 프로그램
-  - organizerId (Long) - Auth Domain 참조
-  - applications, participants - JPA 관계
-  - 비즈니스 메서드: canApply(), isFull(), changeStatus() 등
 - ✅ **ProgramApplication** - 프로그램 신청
-  - program - JPA 관계 (외래키 제약조건 제거)
-  - userId, reviewedBy (Long) - Auth Domain 참조
-  - 비즈니스 메서드: approve(), reject(), cancel() 등
 - ✅ **ProgramParticipant** - 프로그램 참여자
-  - program, application - JPA 관계
-  - userId, attendanceConfirmedBy (Long) - Auth Domain 참조
-  - 비즈니스 메서드: confirmAttendance(), awardMileage() 등
+- ✅ **ProgramStatus**, **ApplicationStatus**, **AttendanceStatus** - Enum
 
-##### Program Domain Enums (3개)
-- ✅ **ProgramStatus** - 프로그램 상태 (DRAFT, OPEN, CLOSED, COMPLETED, CANCELLED)
-- ✅ **ApplicationStatus** - 신청 상태 (PENDING, APPROVED, REJECTED, CANCELLED)
-- ✅ **AttendanceStatus** - 출석 상태 (REGISTERED, ATTENDED, ABSENT, CANCELLED)
-
-##### Mileage Domain (3개 Entity + 2개 Enum)
+##### Mileage Domain (5개: 3 Entity + 2 Enum)
 - ✅ **MileageAccount** - 마일리지 계정
-  - userId (Long) - Auth Domain 참조
-  - transactions - JPA 관계 (OneToMany)
-  - 비즈니스 메서드: earn(), use(), expire(), adjust()
 - ✅ **MileageTransaction** - 마일리지 거래 내역
-  - account - JPA 관계 (ManyToOne, 외래키 제약조건 제거)
-  - userId (Long) - Auth Domain 참조
-  - 출처 추적: sourceType, sourceId
-  - 거래 후 잔액 기록: balanceAfter
+- ✅ **CompetencyCertification** - 역량 인증 기록
+- ✅ **TransactionType**, **VerificationStatus** - Enum
+
+##### Competency Domain (6개: 4 Entity + 2 Enum)
+- ✅ **CompetencySurvey** - 역량 진단 설문
+- ✅ **SurveyQuestion** - 설문 문항
+- ✅ **SurveyResponse** - 설문 응답
+- ✅ **CompetencyResult** - 진단 결과
+- ✅ **TargetRole**, **QuestionType** - Enum
+
+##### Career Domain (3개) ⭐ NEW
+- ✅ **CareerPlan** - 진로 계획
+- ✅ **CareerGoal** - 진로 목표
+- ✅ **CareerMilestone** - 진로 마일스톤
+
+##### Counseling Domain (4개: 3 Entity + 1 Enum)
+- ✅ **CounselingReservation** - 상담 예약
+- ✅ **CounselingSession** - 상담 세션
+- ✅ **CounselorAvailability** - 상담사 가용 시간
+- ✅ **CounselingStatus** - Enum
+
+##### File Domain (1개) ⭐ NEW
+- ✅ **FileMetadata** - 파일 메타데이터
+
+##### Notification Domain (2개) ⭐ NEW
+- ✅ **Notification** - 알림
+- ✅ **NotificationTemplate** - 알림 템플릿
+
+##### System Domain (2개) ⭐ NEW
+- ✅ **SystemLog** - 시스템 로그
+- ✅ **AuditLog** - 감사 로그
 - ✅ **CompetencyCertification** - 역량 인증
   - userId, verifiedBy, fileId (Long) - 다른 Domain 참조
   - 비즈니스 메서드: approve(), reject(), isExpired()
