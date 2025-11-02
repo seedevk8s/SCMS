@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.competency.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

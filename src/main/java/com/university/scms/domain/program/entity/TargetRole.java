@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.program.entity;
 
 public enum TargetRole {
     STUDENT,  // 학생 대상

@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.program.entity;
 
 /**
  * 프로그램 신청 상태 열거형

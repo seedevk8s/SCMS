@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.auth.entity;
 
 /**
  * 사용자 역할 열거형

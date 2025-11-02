@@ -1,6 +1,7 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.competency.entity;
 
 import com.university.scms.domain.common.BaseEntity;
+import com.university.scms.domain.competency.entity.CompetencySurvey;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
