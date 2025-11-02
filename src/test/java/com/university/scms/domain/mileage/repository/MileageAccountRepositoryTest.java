@@ -1,7 +1,7 @@
 package com.university.scms.domain.mileage.repository;
 
 import com.university.scms.config.JpaConfig;
-import com.university.scms.domain.entity.MileageAccount;
+import com.university.scms.domain.mileage.entity.MileageAccount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

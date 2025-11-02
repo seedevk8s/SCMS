@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.mileage.entity;
 
 import com.university.scms.domain.common.BaseEntity;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.mileage.entity;
 
 public enum TransactionType {
     EARN,    // 적립

@@ -1,6 +1,6 @@
 package com.university.scms.domain.mileage.repository;
 
-import com.university.scms.domain.entity.MileageAccount;
+import com.university.scms.domain.mileage.entity.MileageAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
