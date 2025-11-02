@@ -14,7 +14,7 @@ C:\Users\USER\Documents\choongang\Project\scms\scms-backend
 **Phase 1: 기반 구축** - 진행 중
 
 ### 현재 Git 브랜치
-**feature/entity-mileage-domain** - Entity 클래스 생성 작업 중
+**feature/entity-counseling-domain** - Counseling Domain Entity 작업 완료
 
 ### GitHub 저장소
 ```
@@ -61,7 +61,7 @@ https://github.com/seedevk8s/SCMS.git
 
 ### 5. Entity 클래스 생성 (진행 중)
 
-#### ✅ 완료된 Entity (12개 - 52%)
+#### ✅ 완료된 Entity (15개 - 65%)
 
 ##### Auth Domain (2개)
 - ✅ **BaseEntity** - 공통 Audit 필드 (domain/common/BaseEntity.java)
@@ -127,17 +127,40 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ **TargetRole** - 설문 대상 (STUDENT, STAFF, ALL)
 - ✅ **QuestionType** - 문항 유형 (SINGLE_CHOICE, MULTIPLE_CHOICE, SCALE, TEXT)
 
-#### ⏳ 다음 작업: Counseling Domain (3개)
-- [ ] CounselingRequest
-- [ ] CounselingSession
-- [ ] CounselingNote
+##### Counseling Domain (3개 Entity + 1개 Enum) ⭐ NEW
+- ✅ **CounselingReservation** - 상담 예약
+  - studentId, counselorId (Long) - Auth Domain 참조
+  - reservationDate, sessionDuration - 예약 정보
+  - counselingType, requestReason - 상담 정보
+  - status (CounselingStatus) - 예약 상태
+  - sessions - JPA 관계 (OneToMany)
+  - 비즈니스 메서드: confirm(), cancel(), complete(), canCancel(), canModify()
+- ✅ **CounselingSession** - 상담 세션
+  - reservation - JPA 관계 (ManyToOne, 외래키 제약조건 제거)
+  - startTime, endTime, actualDuration - 세션 시간
+  - sessionNotes, counselorNotes - 상담 기록
+  - followUpRequired, nextSessionDate - 후속 조치
+  - 비즈니스 메서드: start(), end(), updateNotes(), scheduleFollowUp()
+- ✅ **CounselorAvailability** - 상담사 가용 시간
+  - counselorId (Long) - Auth Domain 참조
+  - dayOfWeek, startTime, endTime - 가용 시간
+  - isAvailable - 가용 여부
+  - 비즈니스 메서드: setAvailable(), isAvailableAt(), overlaps()
 
-#### ⏳ 남은 Entity (11개)
-- [ ] Counseling Domain (3개)
+##### Counseling Domain Enums (1개)
+- ✅ **CounselingStatus** - 예약 상태 (PENDING, CONFIRMED, CANCELLED, COMPLETED)
+
+#### ⏳ 다음 작업: Career Domain (3개)
+#### ⏳ 다음 작업: Career Domain (3개)
+- [ ] CareerPlan
+- [ ] CareerGoal
+- [ ] CareerMilestone
+
+#### ⏳ 남은 Entity (8개)
 - [ ] Career Domain (3개)
 - [ ] File Domain (1개)
 - [ ] Notification Domain (2개)
-- [ ] System Domain (1개)
+- [ ] System Domain (2개)
 
 ### 6. 문서화
 - ✅ README.md
@@ -158,15 +181,16 @@ https://github.com/seedevk8s/SCMS.git
 - ✅ Phase 1 초기 설정 커밋
 - ✅ main 브랜치에 푸시 완료
 - ✅ ERD 설계 브랜치 생성 및 머지 (feature/phase1-erd-design)
-- ✅ Mileage Domain 작업용 브랜치 생성 (feature/entity-mileage-domain)
+- ✅ Mileage & Competency Domain 브랜치 생성 및 머지 (feature/entity-mileage-domain)
+- ✅ Counseling Domain 작업용 브랜치 생성 (feature/entity-counseling-domain)
 
 ---
 
 ## 🎯 현재 작업: Entity 클래스 생성
 
-### 진행 상황: 12/23 완료 (52%)
+### 진행 상황: 15/23 완료 (65%)
 
-#### ✅ 완료 (12개)
+#### ✅ 완료 (15개)
 1. ✅ BaseEntity
 2. ✅ User + UserRole
 3. ✅ Program + ProgramStatus
@@ -179,11 +203,14 @@ https://github.com/seedevk8s/SCMS.git
 10. ✅ SurveyQuestion + QuestionType
 11. ✅ SurveyResponse
 12. ✅ CompetencyResult
+13. ✅ CounselingReservation + CounselingStatus ⭐ NEW
+14. ✅ CounselingSession ⭐ NEW
+15. ✅ CounselorAvailability ⭐ NEW
 
-#### ⏳ 다음 작업: Counseling Domain (3개)
-1. CounselingRequest - 상담 신청
-2. CounselingSession - 상담 세션
-3. CounselingNote - 상담 기록
+#### ⏳ 다음 작업: Career Domain (3개)
+1. CareerPlan - 진로 계획
+2. CareerGoal - 진로 목표
+3. CareerMilestone - 진로 마일스톤
 
 ---
 
@@ -196,25 +223,26 @@ SCMS 프로젝트 이어서 진행하자!
 
 완료:
 - ERD 설계 완료 (23개 테이블, 9개 도메인)
-- Entity 생성: Auth, Program, Mileage, Competency Domain 완료 (12/23, 52%)
+- Entity 생성: Auth, Program, Mileage, Competency, Counseling Domain 완료 (15/23, 65%)
+- Git: feature/entity-counseling-domain 작업 완료
 
-현재 브랜치: feature/entity-mileage-domain
-현재 작업: Counseling Domain Entity 3개 생성
-진행률: 12/23 (52%)
+현재 브랜치: feature/entity-counseling-domain
+현재 작업: Counseling Domain 완료, Career Domain 시작 준비
+진행률: 15/23 (65%)
 
 프로젝트 위치: C:\Users\USER\Documents\choongang\Project\scms\scms-backend
 GitHub: https://github.com/seedevk8s/SCMS.git
 
-Counseling Domain Entity 생성 시작!
+Career Domain Entity 생성 시작!
 ```
 
 ### 간단 버전
 
 ```
 SCMS Entity 작성 계속!
-완료: Auth, Program, Mileage, Competency Domain (12/23, 52%)
-다음: CounselingRequest, CounselingSession, CounselingNote
-브랜치: feature/entity-mileage-domain
+완료: Auth, Program, Mileage, Competency, Counseling Domain (15/23, 65%)
+다음: CareerPlan, CareerGoal, CareerMilestone
+브랜치: feature/entity-counseling-domain (완료)
 ```
 
 ---
@@ -256,9 +284,13 @@ src/main/java/com/university/scms/domain/
     ├── QuestionType.java                         # ✅ 완료
     ├── SurveyResponse.java                       # ✅ 완료
     ├── CompetencyResult.java                     # ✅ 완료
-    ├── CounselingRequest.java                    # ⏳ 다음
-    ├── CounselingSession.java                    # ⏳ 예정
-    └── CounselingNote.java                       # ⏳ 예정
+    ├── CounselingStatus.java                     # ✅ 완료 ⭐ NEW
+    ├── CounselingReservation.java                # ✅ 완료 ⭐ NEW
+    ├── CounselingSession.java                    # ✅ 완료 ⭐ NEW
+    ├── CounselorAvailability.java                # ✅ 완료 ⭐ NEW
+    ├── CareerPlan.java                           # ⏳ 다음
+    ├── CareerGoal.java                           # ⏳ 예정
+    └── CareerMilestone.java                      # ⏳ 예정
 ```
 
 ---
@@ -278,20 +310,21 @@ src/main/java/com/university/scms/domain/
 - [x] **Auth Domain Entity 완성**
 - [x] **Program Domain Entity 완성**
 - [x] **Mileage Domain Entity 완성**
-- [x] **Competency Domain Entity 완성** ⭐
+- [x] **Competency Domain Entity 완성**
+- [x] **Counseling Domain Entity 완성** ⭐ NEW
 
 ### 🔄 진행 중
-- [ ] **Entity 클래스 작성** ← 현재 단계 (12/23 완료, 52%)
+- [ ] **Entity 클래스 작성** ← 현재 단계 (15/23 완료, 65%)
   - [x] BaseEntity
   - [x] Auth Domain (2개)
   - [x] Program Domain (3개)
   - [x] Mileage Domain (3개)
   - [x] Competency Domain (4개)
-  - [ ] Counseling Domain (3개) ← 다음 작업
-  - [ ] Career Domain (3개)
+  - [x] Counseling Domain (4개) ⭐ 완료
+  - [ ] Career Domain (3개) ← 다음 작업
   - [ ] File Domain (1개)
   - [ ] Notification Domain (2개)
-  - [ ] System Domain (1개)
+  - [ ] System Domain (2개)
 
 ### ⏳ 예정
 - [ ] Repository 작성
@@ -304,7 +337,7 @@ src/main/java/com/university/scms/domain/
 
 ## 🚀 Entity 생성 진행 순서
 
-### ✅ 완료 (12개 - 52%)
+### ✅ 완료 (15개 - 65%)
 - [x] BaseEntity
 - [x] User, UserRole
 - [x] Program, ProgramStatus
@@ -317,28 +350,27 @@ src/main/java/com/university/scms/domain/
 - [x] SurveyQuestion, QuestionType
 - [x] SurveyResponse
 - [x] CompetencyResult
+- [x] CounselingReservation, CounselingStatus ⭐ NEW
+- [x] CounselingSession ⭐ NEW
+- [x] CounselorAvailability ⭐ NEW
 
 ### ⏳ 다음 단계
 
-#### 1. Counseling Domain (3개) ← 현재 위치
-- [ ] CounselingRequest
-- [ ] CounselingSession
-- [ ] CounselingNote
+#### 1. Career Domain (3개) ← 현재 위치
+- [ ] CareerPlan
+- [ ] CareerGoal
+- [ ] CareerMilestone
 
-#### 2. Career Domain (3개)
-- [ ] Portfolio
-- [ ] JobPosting
-- [ ] JobBookmark
+#### 2. File Domain (1개)
+- [ ] FileMetadata
 
-#### 3. File Domain (1개)
-- [ ] FileEntity
-
-#### 4. Notification Domain (2개)
+#### 3. Notification Domain (2개)
 - [ ] Notification
-- [ ] EmailLog
+- [ ] NotificationTemplate
 
-#### 5. System Domain (1개)
-- [ ] AccessLog
+#### 4. System Domain (2개)
+- [ ] SystemLog
+- [ ] AuditLog
 
 ---
 
@@ -369,7 +401,7 @@ src/main/java/com/university/scms/domain/
 ## 🎯 목표
 
 **Phase 1 완료까지 남은 작업:**
-1. Entity 클래스 작성 (진행 중 - 12/23 완료, 52%)
+1. Entity 클래스 작성 (진행 중 - 15/23 완료, 65%)
 2. Repository 인터페이스 작성
 3. Service 계층 기본 구조
 4. JWT 인증 시스템 구현
@@ -379,12 +411,13 @@ src/main/java/com/university/scms/domain/
 
 ---
 
-**작성일**: 2025-10-31  
-**다음 작업**: Counseling Domain Entity 생성 (3개)  
-**예상 소요시간**: Entity 11개 남음  
-**최종 업데이트**: 2025-10-31 (Competency Domain 완성, Counseling Domain 시작 직전)
+**작성일**: 2025-01-XX  
+**다음 작업**: Career Domain Entity 생성 (3개)  
+**예상 소요시간**: Entity 8개 남음  
+**최종 업데이트**: 2025-01-XX (Counseling Domain 완성, Career Domain 시작 준비)
 
 ---
 
 **세션을 재개할 준비가 되었습니다! 🚀**
-**진행률: 12/23 Entity 완료 (52%)**
+**진행률: 15/23 Entity 완료 (65%)**
+**현재 브랜치: feature/entity-counseling-domain**
