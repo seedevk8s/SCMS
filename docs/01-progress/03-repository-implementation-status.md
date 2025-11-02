@@ -1,8 +1,8 @@
 # Repository 구현 진행 상황
 
-## 📊 전체 진행률: 33% (6/18)
+## 📊 전체 진행률: 44% (8/18)
 
-### ✅ 완료된 Repository (6개)
+### ✅ 완료된 Repository (8개)
 
 #### 1. Auth Domain (1개) ✅
 - **UserRepository**: 사용자 계정 조회
@@ -16,7 +16,8 @@
   - 계층 구조 조회
   - 활성화 상태별 조회
 
-#### 3. Program Domain (4개) ✅
+#### 3. Program Domain (6개) ✅
+- **ProgramRepository**: 프로그램 관리
 - **ProgramApplicationRepository**: 프로그램 신청 관리
   - 상태별 조회 (PENDING, APPROVED, REJECTED, CANCELLED)
   - 검토 관련 조회 (검토자별, 미검토)
@@ -42,13 +43,11 @@
   - 표시 순서 관리
   - 통계 집계
 
+- **ProgramCompetencyRepository**: 프로그램-역량 매핑
+
 ---
 
-## ⏳ 진행 중 / 대기 중인 Repository (12개)
-
-### Program Domain (2개)
-- ⏳ ProgramRepository (이미 구현됨, 테스트만 필요)
-- ⏳ ProgramCompetencyRepository
+## ⏳ 진행 중 / 대기 중인 Repository (10개)
 
 ### Mileage Domain (2개)
 - ⏳ MileageTransactionRepository
@@ -129,13 +128,13 @@ boolean existsByXxx(Type xxx);
 
 ## 🚀 다음 단계
 
-### Phase 2 완료 (Program Domain)
-1. ✅ ProgramApplicationRepository (테스트 31개)
-2. ✅ ProgramParticipantRepository (테스트 39개)
-3. ✅ ProgramSatisfactionRepository (테스트 41개)
-4. ✅ ProgramCategoryRepository (테스트 40개)
-5. ⏳ ProgramRepository (테스트 작성)
-6. ⏳ ProgramCompetencyRepository
+### Phase 2 완료 (Program Domain) ✅
+1. ✅ ProgramRepository
+2. ✅ ProgramApplicationRepository (테스트 31개)
+3. ✅ ProgramParticipantRepository (테스트 39개)
+4. ✅ ProgramSatisfactionRepository (테스트 41개)
+5. ✅ ProgramCategoryRepository (테스트 40개)
+6. ✅ ProgramCompetencyRepository
 
 ### Phase 3: Mileage Domain
 - MileageTransactionRepository
@@ -181,9 +180,9 @@ boolean existsByXxx(Type xxx);
 5. 문서: 03-repository-implementation-status.md
 
 ### 다음 작업
-- ProgramRepository 테스트 작성
-- ProgramCompetencyRepository 구현 및 테스트
-- Mileage Domain 시작
+- Mileage Domain 시작 (MileageTransactionRepository, MileageRuleRepository)
+- Competency Domain
+- Counseling & Career Domain
 
 ---
 
