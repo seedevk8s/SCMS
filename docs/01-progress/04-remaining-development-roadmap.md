@@ -2,13 +2,14 @@
 
 ## 📊 전체 진행 현황
 
-**업데이트 일시**: 2025-11-03 (일) 19:00
+**업데이트 일시**: 2025-11-03 (일) 20:00
 
 ```
 전체 진행률: 30%
 
 ✅ 완료: Entity Layer (100%), Repository Layer (100%)
-🔄 진행 예정: Service Layer, Controller Layer, Security, 통합 테스트
+🔄 진행 예정: View Layer (Mock) → Service Layer → Controller (연동)
+🎨 View First 전략 채택
 ```
 
 ---
@@ -31,13 +32,56 @@
 
 ## 🚀 남은 개발 작업
 
+### 🎨 View First 개발 전략
+
+**채택 이유**: 혼자서 풀스택 개발을 진행하므로, 화면을 먼저 만들어 요구사항을 명확히 하고, Mock 데이터로 사용자 경험을 먼저 검증합니다.
+
+#### 실제 개발 순서
+
+```
+1️⃣ Phase 3: View Layer (정적 화면 + Mock 데이터)
+   └─ HTML/CSS/JavaScript로 화면 구현
+   └─ Mock 데이터로 화면 동작 확인
+   └─ 사용자 경험 검증
+   
+2️⃣ Phase 4: Service Layer  
+   └─ 화면에서 필요한 데이터 구조 파악됨
+   └─ 비즈니스 로직 구현
+   └─ 단위 테스트
+   
+3️⃣ Phase 5: Controller Layer (API 연동)
+   └─ REST API 구현
+   └─ View에서 Mock 데이터 제거
+   └─ 실제 Service와 연동
+```
+
+#### 🎯 View First의 장점
+
+| 항목 | 설명 |
+|-----|------|
+| **요구사항 명확화** | 화면을 먼저 만들면서 어떤 데이터가 필요한지 자연스럽게 파악 |
+| **빠른 피드백** | 화면으로 바로 확인하면서 개발 → 수정이 용이 |
+| **API 스펙 최적화** | 화면 요구사항에 맞춘 API 설계 → 불필요한 수정 감소 |
+| **동기 부여** | 동작하는 화면을 보면서 개발 → 진행 상황 체감 |
+
+#### ⚠️ 주의사항
+
+- Mock 데이터는 실제 데이터 구조와 최대한 유사하게 작성
+- 화면 개발 중 필요한 API 스펙을 문서화
+- Phase 5에서 Mock 제거하고 실제 API로 교체 시 철저히 테스트
+
+---
+
 ### 📋 전체 개요
+
+**🎨 View First 접근 방식 적용!**
+화면을 먼저 만들고 Mock 데이터로 동작 확인 후, Service/Controller 구현
 
 | Phase | 작업 내용 | 예상 소요 | 우선순위 |
 |-------|----------|----------|---------|
-| **Phase 3** | Service Layer | 2-3주 | ⭐⭐⭐ 높음 |
-| **Phase 4** | Controller Layer (REST API) | 2-3주 | ⭐⭐⭐ 높음 |
-| **Phase 5** | View Layer (Thymeleaf) | 2-3주 | ⭐⭐⭐ 높음 |
+| **Phase 3** | View Layer (정적 화면 + Mock) | 2-3주 | ⭐⭐⭐ 높음 |
+| **Phase 4** | Service Layer | 2-3주 | ⭐⭐⭐ 높음 |
+| **Phase 5** | Controller Layer (API 연동) | 2-3주 | ⭐⭐⭐ 높음 |
 | **Phase 6** | Spring Security 통합 | 1주 | ⭐⭐⭐ 높음 |
 | **Phase 7** | DTO & Validation | 1주 | ⭐⭐ 중간 |
 | **Phase 8** | 예외 처리 & 로깅 | 1주 | ⭐⭐ 중간 |
@@ -49,7 +93,180 @@
 
 ---
 
-## 📝 Phase 3: Service Layer 구현
+## 📝 Phase 3: View Layer (정적 화면 + Mock 데이터)
+
+### 🎯 목표
+**화면을 먼저 구현**하여 사용자 경험을 검증하고, 필요한 데이터 구조를 파악합니다.
+Mock 데이터로 동작하는 완전한 화면을 만든 후, 나중에 실제 API와 연동합니다.
+
+### 📦 구현 우선순위
+
+#### 1단계: 핵심 화면 (Week 1-2)
+- [ ] **레이아웃 & 공통 컴포넌트**
+  - 헤더/푸터/사이드바
+  - 페이지네이션, 테이블, 모달
+  - 공통 CSS/JavaScript
+
+- [ ] **Auth Views**
+  - 로그인/회원가입
+  - 프로필 페이지
+
+- [ ] **Dashboard**
+  - 메인 대시보드
+  - 역할별 대시보드
+
+#### 2단계: 주요 기능 화면 (Week 3-4)
+- [ ] **Program Views**
+  - 프로그램 목록/상세
+  - 프로그램 신청
+  - 참가자 관리
+
+- [ ] **Mileage Views**
+  - 마일리지 현황
+  - 거래 내역
+
+#### 3단계: 나머지 화면 (Week 5-6)
+- [ ] **Competency Views** - 역량 설문/결과
+- [ ] **Counseling Views** - 상담 예약/내역
+- [ ] **Career Views** - 진로 계획/목표
+- [ ] **Admin Views** - 관리자 페이지
+
+---
+
+### 🎨 Mock 데이터 작성 방법
+
+#### JavaScript Mock API 패턴
+```javascript
+// /static/js/mock/program-mock.js
+const MockProgramAPI = {
+    // 프로그램 목록
+    getPrograms: function(page = 0, size = 10) {
+        return Promise.resolve({
+            content: [
+                {
+                    id: 1,
+                    title: "Spring Boot 워크샵",
+                    description: "Spring Boot 실전 개발",
+                    category: "개발",
+                    status: "RECRUITING",
+                    startDate: "2025-12-01",
+                    endDate: "2025-12-15",
+                    maxParticipants: 30,
+                    currentParticipants: 15
+                },
+                {
+                    id: 2,
+                    title: "AI 역량 강화",
+                    description: "머신러닝 기초",
+                    category: "AI",
+                    status: "IN_PROGRESS",
+                    startDate: "2025-11-15",
+                    endDate: "2025-11-30",
+                    maxParticipants: 25,
+                    currentParticipants: 25
+                }
+            ],
+            totalElements: 20,
+            totalPages: 2,
+            number: page,
+            size: size
+        });
+    },
+    
+    // 프로그램 상세
+    getProgram: function(id) {
+        const programs = {
+            1: {
+                id: 1,
+                title: "Spring Boot 워크샵",
+                description: "Spring Boot 기초부터 실전까지 배우는 워크샵",
+                category: "개발",
+                status: "RECRUITING",
+                startDate: "2025-12-01",
+                endDate: "2025-12-15",
+                maxParticipants: 30,
+                currentParticipants: 15,
+                competencies: ["문제해결", "창의력"],
+                instructor: "김교수"
+            }
+        };
+        return Promise.resolve(programs[id] || null);
+    },
+    
+    // 프로그램 신청
+    applyProgram: function(programId) {
+        return Promise.resolve({
+            success: true,
+            message: "신청이 완료되었습니다.",
+            applicationId: Date.now()
+        });
+    }
+};
+```
+
+#### HTML에서 Mock API 사용
+```html
+<!-- program/list.html -->
+<script src="/js/mock/program-mock.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadPrograms();
+});
+
+function loadPrograms() {
+    // TODO: Phase 5에서 실제 API로 교체
+    // fetch('/api/programs')
+    
+    // Mock API 사용
+    MockProgramAPI.getPrograms(0, 10)
+        .then(data => {
+            renderPrograms(data.content);
+            renderPagination(data);
+        });
+}
+
+function renderPrograms(programs) {
+    const container = document.getElementById('program-list');
+    container.innerHTML = programs.map(program => `
+        <div class="program-card">
+            <h3>${program.title}</h3>
+            <p>${program.description}</p>
+            <span class="badge badge-${program.status}">${getStatusText(program.status)}</span>
+            <div class="program-info">
+                <span>정원: ${program.currentParticipants}/${program.maxParticipants}</span>
+                <span>기간: ${program.startDate} ~ ${program.endDate}</span>
+            </div>
+            <a href="/views/programs/${program.id}" class="btn btn-primary">상세보기</a>
+        </div>
+    `).join('');
+}
+</script>
+```
+
+---
+
+### 📊 예상 산출물
+
+| 항목 | 개수 | 비고 |
+|-----|------|------|
+| **Thymeleaf Templates** | 50개 | HTML 화면 |
+| **Layout/Fragment** | 10개 | 공통 레이아웃 |
+| **Mock JavaScript** | 20개 | Mock API |
+| **CSS 파일** | 15개 | 스타일시트 |
+| **JavaScript 파일** | 20개 | 화면 로직 |
+
+---
+
+### ✅ Phase 3 완료 기준
+
+- [x] 모든 화면이 Mock 데이터로 동작
+- [x] 사용자가 클릭/입력/탐색 가능
+- [x] 필요한 API 스펙이 문서화됨
+- [x] 화면 흐름이 자연스러움
+
+---
+
+## 📝 Phase 4: Service Layer 구현
 
 ### 🎯 목표
 비즈니스 로직을 구현하고 트랜잭션을 관리하는 서비스 계층 구축
@@ -167,10 +384,17 @@
 
 ---
 
-## 📝 Phase 4: Controller Layer (REST API)
+## 📝 Phase 5: Controller Layer (REST API + View 연동)
 
 ### 🎯 목표
-RESTful API 엔드포인트 구현 및 HTTP 통신 처리
+RESTful API 엔드포인트 구현 및 **Phase 3에서 만든 View와 연동**
+
+**주요 작업:**
+1. REST API Controller 구현
+2. View Controller에서 Service 호출
+3. **Mock 데이터 제거**
+4. **실제 API로 교체**
+5. 통합 동작 확인
 
 ### 📦 구현할 Controller (18개)
 
@@ -264,17 +488,85 @@ RESTful API 엔드포인트 구현 및 HTTP 통신 처리
    - Swagger/OpenAPI 적용
    - API 명세 자동 생성
 
-### 📊 예상 산출물
-- Controller 클래스: 18개
-- API 엔드포인트: 약 100개
-- Controller 테스트: 약 200개
+---
+
+### 🔄 Mock 제거 및 실제 API 연동
+
+#### Before (Phase 3 - Mock 사용)
+```javascript
+// program.js
+function loadPrograms() {
+    // Mock API 사용
+    MockProgramAPI.getPrograms(0, 10)
+        .then(data => {
+            renderPrograms(data.content);
+        });
+}
+```
+
+#### After (Phase 5 - 실제 API 연동)
+```javascript
+// program.js
+function loadPrograms() {
+    // 실제 REST API 호출
+    fetch('/api/programs?page=0&size=10')
+        .then(response => response.json())
+        .then(data => {
+            renderPrograms(data.content);
+        })
+        .catch(error => {
+            console.error('프로그램 목록 조회 실패:', error);
+            showErrorMessage('프로그램 목록을 불러올 수 없습니다.');
+        });
+}
+```
+
+#### View Controller 구현
+```java
+@Controller
+@RequestMapping("/views/programs")
+@RequiredArgsConstructor
+public class ProgramViewController {
+    
+    private final ProgramService programService;
+    
+    @GetMapping
+    public String listPrograms(Model model, Pageable pageable) {
+        // Service에서 실제 데이터 조회
+        Page<ProgramResponse> programs = programService.findAll(pageable);
+        model.addAttribute("programs", programs);
+        return "program/list";
+    }
+    
+    @GetMapping("/{id}")
+    public String programDetail(@PathVariable Long id, Model model) {
+        ProgramResponse program = programService.findById(id);
+        model.addAttribute("program", program);
+        return "program/detail";
+    }
+}
+```
 
 ---
 
-## 📝 Phase 5: View Layer (Thymeleaf)
+### 📊 예상 산출물
+- Controller 클래스: 18개 (REST API)
+- View Controller: 18개 (Thymeleaf)
+- API 엔드포인트: 약 100개
+- Controller 테스트: 약 200개
+- **Mock 제거 작업**: 20개 파일
 
-### 🎯 목표
-사용자가 직접 사용할 웹 화면 구현 (서버 사이드 렌더링)
+---
+
+## 📝 Phase 5: View Layer 상세 내용
+
+**⚠️ 이 Phase는 개발 순서 조정으로 Phase 3으로 이동되었습니다.**
+
+**View First 개발 전략**을 채택하여, View Layer를 먼저 구현합니다.
+
+👉 **상세 내용은 "Phase 3: View Layer (정적 화면 + Mock 데이터)" 섹션을 참조하세요.**
+
+---
 
 ### 📦 구현할 View Controller & Templates
 
@@ -818,27 +1110,37 @@ API 명세 자동화 및 개발자 가이드 작성
 
 ## 📅 예상 개발 일정
 
-### 단계별 타임라인
+### 🎨 View First 개발 순서
 
 ```
-Week 1-2:   Service Layer (Auth, Common)
-Week 3-4:   Service Layer (Program, Mileage)
-Week 5-6:   Service Layer (Competency, Counseling, Career)
-Week 7-8:   Controller Layer - REST API (Auth, Program, Mileage)
-Week 9-10:  Controller Layer - REST API (Competency, Counseling, Career)
-Week 11-12: View Layer - Thymeleaf (Auth, Dashboard, Common)
-Week 13-14: View Layer - Thymeleaf (Program, Mileage, Competency)
-Week 15-16: View Layer - Thymeleaf (Counseling, Career, Admin)
-Week 17:    Spring Security 통합
-Week 18:    DTO & Validation
-Week 19:    예외 처리 & 로깅
-Week 20-21: 통합 테스트
-Week 22:    API 문서화
-Week 23:    배포 준비 & 최적화
-Week 24:    최종 테스트 & 버그 픽스
+Week 1-2:   Phase 3 - View Layer (Auth, Dashboard, 공통)
+Week 3-4:   Phase 3 - View Layer (Program, Mileage, Competency)
+Week 5-6:   Phase 3 - View Layer (Counseling, Career, Admin)
+Week 7-8:   Phase 4 - Service Layer (Auth, Common, Program)
+Week 9-10:  Phase 4 - Service Layer (Mileage, Competency, Counseling, Career)
+Week 11-12: Phase 5 - Controller & API 연동 (Auth, Program, Mileage)
+Week 13-14: Phase 5 - Controller & API 연동 (Competency, Counseling, Career)
+Week 15:    Phase 6 - Spring Security 통합
+Week 16:    Phase 7 - DTO & Validation
+Week 17:    Phase 8 - 예외 처리 & 로깅
+Week 18-19: Phase 9 - 통합 테스트
+Week 20:    Phase 10 - API 문서화
+Week 21:    Phase 11 - 배포 준비 & 최적화
+Week 22:    최종 테스트 & 버그 픽스
 ```
 
-**총 예상 기간**: 약 24주 (6개월)
+**총 예상 기간**: 약 22주 (5.5개월)
+
+### 📌 핵심 마일스톤
+
+| 주차 | 마일스톤 | 완료 기준 |
+|-----|---------|---------|
+| Week 6 | **화면 완성** | 모든 화면이 Mock으로 동작 |
+| Week 10 | **비즈니스 로직 완성** | Service Layer 완료 & 테스트 통과 |
+| Week 14 | **API 연동 완료** | Mock 제거, 실제 데이터로 동작 |
+| Week 15 | **보안 적용** | 인증/인가 완료 |
+| Week 19 | **테스트 완료** | 통합 테스트 통과 |
+| Week 22 | **배포 준비** | 운영 환경 준비 완료 |
 
 ---
 
@@ -950,4 +1252,5 @@ chore: 기타 변경사항
 **작성일**: 2025-11-03  
 **작성자**: Development Team  
 **프로젝트**: SCMS v1.0  
-**마지막 업데이트**: 2025-11-03 19:00
+**마지막 업데이트**: 2025-11-03 20:00  
+**개발 전략**: View First Approach ⭐
