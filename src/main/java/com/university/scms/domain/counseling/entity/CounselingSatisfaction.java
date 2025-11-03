@@ -1,7 +1,6 @@
 package com.university.scms.domain.counseling.entity;
 
 import com.university.scms.domain.common.BaseEntity;
-import com.university.scms.domain.entity.CounselingSession;
 import jakarta.persistence.*;
 import lombok.*;
 

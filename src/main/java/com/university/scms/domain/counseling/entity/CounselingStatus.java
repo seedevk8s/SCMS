@@ -1,4 +1,4 @@
-package com.university.scms.domain.entity;
+package com.university.scms.domain.counseling.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
