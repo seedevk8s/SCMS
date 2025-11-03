@@ -1,7 +1,7 @@
 package com.university.scms.domain.counseling.repository;
 
-import com.university.scms.domain.entity.CounselingReservation;
-import com.university.scms.domain.entity.CounselingStatus;
+import com.university.scms.domain.counseling.entity.CounselingReservation;
+import com.university.scms.domain.counseling.entity.CounselingStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

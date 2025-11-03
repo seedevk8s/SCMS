@@ -1,8 +1,8 @@
 package com.university.scms.domain.counseling.repository;
 
 import com.university.scms.config.JpaConfig;
-import com.university.scms.domain.entity.CounselingReservation;
-import com.university.scms.domain.entity.CounselingStatus;
+import com.university.scms.domain.counseling.entity.CounselingReservation;
+import com.university.scms.domain.counseling.entity.CounselingStatus;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
