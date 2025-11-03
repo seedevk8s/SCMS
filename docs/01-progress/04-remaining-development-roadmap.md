@@ -2,7 +2,7 @@
 
 ## 📊 전체 진행 현황
 
-**업데이트 일시**: 2025-11-03 (일) 18:00
+**업데이트 일시**: 2025-11-03 (일) 19:00
 
 ```
 전체 진행률: 30%
@@ -37,14 +37,15 @@
 |-------|----------|----------|---------|
 | **Phase 3** | Service Layer | 2-3주 | ⭐⭐⭐ 높음 |
 | **Phase 4** | Controller Layer (REST API) | 2-3주 | ⭐⭐⭐ 높음 |
-| **Phase 5** | Spring Security 통합 | 1주 | ⭐⭐⭐ 높음 |
-| **Phase 6** | DTO & Validation | 1주 | ⭐⭐ 중간 |
-| **Phase 7** | 예외 처리 & 로깅 | 1주 | ⭐⭐ 중간 |
-| **Phase 8** | 통합 테스트 | 1-2주 | ⭐⭐ 중간 |
-| **Phase 9** | API 문서화 | 3일 | ⭐ 낮음 |
-| **Phase 10** | 배포 준비 | 1주 | ⭐ 낮음 |
+| **Phase 5** | View Layer (Thymeleaf) | 2-3주 | ⭐⭐⭐ 높음 |
+| **Phase 6** | Spring Security 통합 | 1주 | ⭐⭐⭐ 높음 |
+| **Phase 7** | DTO & Validation | 1주 | ⭐⭐ 중간 |
+| **Phase 8** | 예외 처리 & 로깅 | 1주 | ⭐⭐ 중간 |
+| **Phase 9** | 통합 테스트 | 1-2주 | ⭐⭐ 중간 |
+| **Phase 10** | API 문서화 | 3일 | ⭐ 낮음 |
+| **Phase 11** | 배포 준비 | 1주 | ⭐ 낮음 |
 
-**총 예상 소요 기간**: 약 8-12주
+**총 예상 소요 기간**: 약 11-15주
 
 ---
 
@@ -270,7 +271,330 @@ RESTful API 엔드포인트 구현 및 HTTP 통신 처리
 
 ---
 
-## 📝 Phase 5: Spring Security 통합
+## 📝 Phase 5: View Layer (Thymeleaf)
+
+### 🎯 목표
+사용자가 직접 사용할 웹 화면 구현 (서버 사이드 렌더링)
+
+### 📦 구현할 View Controller & Templates
+
+#### Auth Views
+- [ ] **AuthViewController** (`/views/auth`)
+  - `GET /login` - 로그인 페이지
+  - `GET /register` - 회원가입 페이지
+  - `GET /profile` - 프로필 페이지
+
+**Templates**:
+- `auth/login.html`
+- `auth/register.html`
+- `auth/profile.html`
+
+---
+
+#### Program Views
+- [ ] **ProgramViewController** (`/views/programs`)
+  - `GET /programs` - 프로그램 목록 페이지
+  - `GET /programs/{id}` - 프로그램 상세 페이지
+  - `GET /programs/create` - 프로그램 생성 페이지 (관리자)
+  - `GET /programs/{id}/edit` - 프로그램 수정 페이지 (관리자)
+
+- [ ] **ProgramApplicationViewController** (`/views/programs/{id}`)
+  - `GET /apply` - 신청 페이지
+  - `GET /applications` - 내 신청 목록 페이지
+
+- [ ] **ProgramParticipantViewController** (`/views/programs/{id}`)
+  - `GET /participants` - 참가자 관리 페이지 (관리자)
+
+**Templates**:
+- `program/list.html`
+- `program/detail.html`
+- `program/create.html`
+- `program/edit.html`
+- `program/apply.html`
+- `program/my-applications.html`
+- `program/participants.html`
+
+---
+
+#### Mileage Views
+- [ ] **MileageViewController** (`/views/mileage`)
+  - `GET /mileage` - 마일리지 현황 페이지
+  - `GET /mileage/transactions` - 거래 내역 페이지
+  - `GET /mileage/rules` - 마일리지 규칙 페이지 (관리자)
+
+**Templates**:
+- `mileage/balance.html`
+- `mileage/transactions.html`
+- `mileage/rules.html`
+
+---
+
+#### Competency Views
+- [ ] **CompetencyViewController** (`/views/competency`)
+  - `GET /surveys` - 역량 설문 목록 페이지
+  - `GET /surveys/{id}` - 설문 응답 페이지
+  - `GET /results` - 내 역량 결과 페이지
+
+**Templates**:
+- `competency/survey-list.html`
+- `competency/survey-form.html`
+- `competency/results.html`
+
+---
+
+#### Counseling Views
+- [ ] **CounselingViewController** (`/views/counseling`)
+  - `GET /counseling` - 상담 예약 메인 페이지
+  - `GET /counseling/reservations` - 내 예약 목록
+  - `GET /counseling/sessions` - 상담 내역 페이지
+  - `GET /counseling/availability` - 상담사 일정 관리 페이지 (상담사)
+
+**Templates**:
+- `counseling/main.html`
+- `counseling/reservations.html`
+- `counseling/sessions.html`
+- `counseling/availability.html`
+
+---
+
+#### Career Views
+- [ ] **CareerViewController** (`/views/career`)
+  - `GET /career/plans` - 진로 계획 목록
+  - `GET /career/plans/{id}` - 진로 계획 상세
+  - `GET /career/plans/create` - 진로 계획 생성
+
+**Templates**:
+- `career/plan-list.html`
+- `career/plan-detail.html`
+- `career/plan-create.html`
+
+---
+
+#### Dashboard & Common Views
+- [ ] **DashboardViewController** (`/views`)
+  - `GET /` - 메인 대시보드
+  - `GET /dashboard` - 역할별 대시보드
+
+- [ ] **AdminViewController** (`/views/admin`)
+  - `GET /admin` - 관리자 메인
+  - `GET /admin/users` - 사용자 관리
+  - `GET /admin/programs` - 프로그램 관리
+
+**Templates**:
+- `index.html`
+- `dashboard/student.html`
+- `dashboard/staff.html`
+- `dashboard/admin.html`
+- `admin/main.html`
+- `admin/users.html`
+- `admin/programs.html`
+
+---
+
+### 🎨 Layout & Fragments
+
+#### 공통 레이아웃
+- [ ] **fragments/layout.html**
+  - 헤더 (네비게이션)
+  - 푸터
+  - 사이드바
+
+- [ ] **fragments/components.html**
+  - 페이지네이션
+  - 검색 폼
+  - 테이블
+  - 모달
+  - 알림 메시지
+
+**Layout Templates**:
+- `layouts/default.html` - 기본 레이아웃
+- `layouts/admin.html` - 관리자 레이아웃
+- `fragments/header.html` - 헤더
+- `fragments/footer.html` - 푸터
+- `fragments/sidebar.html` - 사이드바
+- `fragments/pagination.html` - 페이지네이션
+
+---
+
+### 📂 정적 리소스
+
+#### CSS
+- [ ] **스타일시트 구성**
+  - `/static/css/common.css` - 공통 스타일
+  - `/static/css/layout.css` - 레이아웃
+  - `/static/css/components.css` - 컴포넌트
+  - `/static/css/pages/*.css` - 페이지별 스타일
+
+#### JavaScript
+- [ ] **스크립트 구성**
+  - `/static/js/common.js` - 공통 기능
+  - `/static/js/validation.js` - 폼 검증
+  - `/static/js/api.js` - API 호출
+  - `/static/js/pages/*.js` - 페이지별 스크립트
+
+#### 외부 라이브러리
+- [ ] **프론트엔드 라이브러리**
+  - Bootstrap 5 (UI 프레임워크)
+  - jQuery (DOM 조작)
+  - Chart.js (차트)
+  - DataTables (테이블)
+  - Moment.js (날짜 처리)
+
+---
+
+### 🛠️ 주요 작업 내용
+
+#### 1. View Controller 구현
+```java
+@Controller
+@RequestMapping("/views/programs")
+public class ProgramViewController {
+    
+    @GetMapping
+    public String listPrograms(Model model, Pageable pageable) {
+        Page<ProgramResponse> programs = programService.findAll(pageable);
+        model.addAttribute("programs", programs);
+        return "program/list";
+    }
+    
+    @GetMapping("/{id}")
+    public String programDetail(@PathVariable Long id, Model model) {
+        ProgramResponse program = programService.findById(id);
+        model.addAttribute("program", program);
+        return "program/detail";
+    }
+}
+```
+
+#### 2. Thymeleaf 템플릿 작성
+```html
+<!-- program/list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>프로그램 목록</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <h1>프로그램 목록</h1>
+        
+        <div class="program-list">
+            <div th:each="program : ${programs}" class="program-card">
+                <h3 th:text="${program.title}">프로그램 제목</h3>
+                <p th:text="${program.description}">설명</p>
+                <a th:href="@{/views/programs/{id}(id=${program.id})}">
+                    상세보기
+                </a>
+            </div>
+        </div>
+        
+        <!-- 페이지네이션 -->
+        <div th:replace="~{fragments/pagination :: pagination}"></div>
+    </div>
+</body>
+</html>
+```
+
+#### 3. 폼 처리
+```html
+<!-- program/create.html -->
+<form th:action="@{/api/programs}" method="post" th:object="${programForm}">
+    <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" 
+               th:field="*{title}" 
+               class="form-control"
+               th:errorclass="is-invalid">
+        <div class="invalid-feedback" th:errors="*{title}"></div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">생성</button>
+</form>
+```
+
+#### 4. AJAX 통신
+```javascript
+// program.js
+function applyProgram(programId) {
+    $.ajax({
+        url: `/api/programs/${programId}/apply`,
+        method: 'POST',
+        success: function(response) {
+            alert('신청이 완료되었습니다.');
+            location.reload();
+        },
+        error: function(xhr) {
+            alert('신청에 실패했습니다: ' + xhr.responseJSON.message);
+        }
+    });
+}
+```
+
+---
+
+### 📊 예상 산출물
+
+| 항목 | 개수 | 비고 |
+|-----|------|------|
+| **View Controller** | 18개 | 도메인별 |
+| **Thymeleaf Templates** | 약 50개 | 페이지 화면 |
+| **Layout/Fragment** | 약 10개 | 공통 레이아웃 |
+| **CSS 파일** | 약 15개 | 스타일시트 |
+| **JavaScript 파일** | 약 20개 | 동적 기능 |
+| **View 테스트** | 약 100개 | Controller 테스트 |
+
+---
+
+### 🎨 UI/UX 고려사항
+
+#### 1. 반응형 디자인
+- Bootstrap Grid System 활용
+- 모바일/태블릿/데스크톱 대응
+
+#### 2. 접근성
+- 시맨틱 HTML
+- ARIA 속성
+- 키보드 네비게이션
+
+#### 3. 사용자 경험
+- 로딩 인디케이터
+- 에러 메시지
+- 성공 알림
+- 폼 검증 피드백
+
+#### 4. 성능 최적화
+- CSS/JS 번들링
+- 이미지 최적화
+- 캐시 활용
+
+---
+
+### 🔐 보안 고려사항
+
+#### 1. CSRF 토큰
+```html
+<form th:action="@{/api/programs}" method="post">
+    <input type="hidden" th:name="${_csrf.parameterName}" 
+           th:value="${_csrf.token}">
+    <!-- 폼 필드 -->
+</form>
+```
+
+#### 2. XSS 방지
+- Thymeleaf 기본 이스케이프 활용
+- `th:text` vs `th:utext` 주의
+
+#### 3. 권한 체크
+```html
+<div sec:authorize="hasRole('ADMIN')">
+    <!-- 관리자만 볼 수 있는 내용 -->
+</div>
+```
+
+---
+
+## 📝 Phase 6: Spring Security 통합
 
 ### 🎯 목표
 인증/인가 시스템 구축 및 보안 강화
@@ -320,7 +644,7 @@ RESTful API 엔드포인트 구현 및 HTTP 통신 처리
 
 ---
 
-## 📝 Phase 6: DTO & Validation
+## 📝 Phase 7: DTO & Validation
 
 ### 🎯 목표
 데이터 전송 객체 정의 및 입력 검증 구현
@@ -357,7 +681,7 @@ RESTful API 엔드포인트 구현 및 HTTP 통신 처리
 
 ---
 
-## 📝 Phase 7: 예외 처리 & 로깅
+## 📝 Phase 8: 예외 처리 & 로깅
 
 ### 🎯 목표
 일관된 예외 처리 및 효과적인 로깅 시스템 구축
@@ -395,7 +719,7 @@ RESTful API 엔드포인트 구현 및 HTTP 통신 처리
 
 ---
 
-## 📝 Phase 8: 통합 테스트
+## 📝 Phase 9: 통합 테스트
 
 ### 🎯 목표
 전체 시스템의 통합 테스트 및 E2E 시나리오 검증
@@ -427,7 +751,7 @@ RESTful API 엔드포인트 구현 및 HTTP 통신 처리
 
 ---
 
-## 📝 Phase 9: API 문서화
+## 📝 Phase 10: API 문서화
 
 ### 🎯 목표
 API 명세 자동화 및 개발자 가이드 작성
@@ -454,7 +778,7 @@ API 명세 자동화 및 개발자 가이드 작성
 
 ---
 
-## 📝 Phase 10: 배포 준비
+## 📝 Phase 11: 배포 준비
 
 ### 🎯 목표
 운영 환경 배포를 위한 설정 및 최적화
@@ -500,18 +824,21 @@ API 명세 자동화 및 개발자 가이드 작성
 Week 1-2:   Service Layer (Auth, Common)
 Week 3-4:   Service Layer (Program, Mileage)
 Week 5-6:   Service Layer (Competency, Counseling, Career)
-Week 7-8:   Controller Layer (Auth, Program, Mileage)
-Week 9-10:  Controller Layer (Competency, Counseling, Career)
-Week 11:    Spring Security 통합
-Week 12:    DTO & Validation
-Week 13:    예외 처리 & 로깅
-Week 14-15: 통합 테스트
-Week 16:    API 문서화
-Week 17:    배포 준비 & 최적화
-Week 18:    최종 테스트 & 버그 픽스
+Week 7-8:   Controller Layer - REST API (Auth, Program, Mileage)
+Week 9-10:  Controller Layer - REST API (Competency, Counseling, Career)
+Week 11-12: View Layer - Thymeleaf (Auth, Dashboard, Common)
+Week 13-14: View Layer - Thymeleaf (Program, Mileage, Competency)
+Week 15-16: View Layer - Thymeleaf (Counseling, Career, Admin)
+Week 17:    Spring Security 통합
+Week 18:    DTO & Validation
+Week 19:    예외 처리 & 로깅
+Week 20-21: 통합 테스트
+Week 22:    API 문서화
+Week 23:    배포 준비 & 최적화
+Week 24:    최종 테스트 & 버그 픽스
 ```
 
-**총 예상 기간**: 약 18주 (4.5개월)
+**총 예상 기간**: 약 24주 (6개월)
 
 ---
 
@@ -547,6 +874,7 @@ Week 18:    최종 테스트 & 버그 픽스
 진행 예정:
 ├─ Service Layer     [░░░░░░░░░░░░░░░░░░░░]   0%
 ├─ Controller Layer  [░░░░░░░░░░░░░░░░░░░░]   0%
+├─ View Layer        [░░░░░░░░░░░░░░░░░░░░]   0%
 ├─ Security          [░░░░░░░░░░░░░░░░░░░░]   0%
 ├─ DTO & Validation  [░░░░░░░░░░░░░░░░░░░░]   0%
 ├─ Exception/Logging [░░░░░░░░░░░░░░░░░░░░]   0%
@@ -622,4 +950,4 @@ chore: 기타 변경사항
 **작성일**: 2025-11-03  
 **작성자**: Development Team  
 **프로젝트**: SCMS v1.0  
-**마지막 업데이트**: 2025-11-03 18:00
+**마지막 업데이트**: 2025-11-03 19:00
