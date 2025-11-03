@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>SCMS - 학생역량관리시스템</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Hero Section (Carousel) -->
+        <section class="hero-section">
+            <div class="hero-carousel">
+                <!-- Slide 1: 비교과 프로그램 캘린더 연동 -->
+                <div class="hero-slide slide-1 active">
+                    <div class="hero-content">
+                        <div class="hero-badge">비교과 프로그램 캘린더 연동</div>
+                        <h1 class="hero-title">비교과 프로그램이<br>내 일정속으로 쏙쏙!!</h1>
+                        <p class="hero-description">
+                            PC와 모바일 캘린더에서 비교과 프로그램 일정을 확인할 수 있습니다<br>
+                            (네이버 / 구글 / Outlook / Mac 등 iCal 지원 캘린더)
+                        </p>
+                    </div>
+                    <div class="hero-image">
+                        <i class="fas fa-calendar-alt fa-5x"></i>
+                    </div>
+                </div>
+                
+                <!-- Slide 2: 알림판 -->
+                <div class="hero-slide slide-2">
+                    <div class="hero-content">
+                        <div class="hero-badge">공지사항</div>
+                        <h1 class="hero-title">알림판</h1>
+                        <p class="hero-subtitle">알려, 알리고, 알리니, 알린다.</p>
+                        <p class="hero-description">
+                            각종 현수막, 포스터 홍보를 직접하세요.<br>
+                            작착작 쌓인 정보는 지식이 되고, 여러분들의 이야기를 만듭니다.
+                        </p>
+                    </div>
+                    <div class="hero-image">
+                        <i class="fas fa-bullhorn fa-5x"></i>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: 핵심역량 진단 -->
+                <div class="hero-slide slide-3">
+                    <div class="hero-content">
+                        <div class="hero-badge">역량 진단</div>
+                        <h1 class="hero-title">핵심역량 진단에<br>참여하세요!</h1>
+                        <p class="hero-description">
+                            진단결과는 핵심능력 및 역량진단을 제공하며 자기개발 가이드로<br>
+                            활용하실 수 있습니다.
+                        </p>
+                        <p class="hero-note">(진단결과는 즉시 확인이 가능합니다.)</p>
+                    </div>
+                    <div class="hero-image">
+                        <i class="fas fa-question-circle fa-5x"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carousel Controls -->
+            <button class="carousel-control prev" id="heroPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next" id="heroNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <button class="indicator active" data-slide="0"></button>
+                <button class="indicator" data-slide="1"></button>
+                <button class="indicator" data-slide="2"></button>
+            </div>
+        </section>
+        
+        <!-- Icon Menu Section -->
+        <section class="icon-menu-section">
+            <div class="container">
+                <div class="icon-menu-grid">
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-chart-bar fa-2x"></i></div>
+                        <span class="icon-label">전체보기</span>
+                    </a>
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-lightbulb fa-2x"></i></div>
+                        <span class="icon-label">문제해결역량</span>
+                    </a>
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-user-check fa-2x"></i></div>
+                        <span class="icon-label">자기관리역량</span>
+                    </a>
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-users fa-2x"></i></div>
+                        <span class="icon-label">공감소통역량</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Programs Section -->
+        <section class="programs-section">
+            <div class="container">
+                <h2 class="section-title"><i class="fas fa-clipboard-list"></i> 전체 프로그램</h2>
+                <div class="program-grid" id="programGrid1"></div>
+            </div>
+        </section>
+        
+        <!-- Page Specific JavaScript -->
+        <script th:src="@{/js/main.js}"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>                             <!--① 브라우저가 index.html 요청-->   <!-- (메인 페이지 - Fragment 적용)-->  <!--메인 페이지의 실제 컨텐츠만 작성-->
+                                     <!--이 페이지의 title을 Layout에 전달-->  <!--이 페이지의 content를 Layout에 전달-->  <!--Content만 작성하면 Header/Footer는 자동 추가!-->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">      <!--② th:replace 발견 → default.html 로드--> <!-- Layout 사용 선언-->
+<head>
+    <title>SCMS - 학생역량관리시스템</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-slide slide-1">
+                <div class="hero-content">
+                    <h1 class="hero-title">학생 역량 관리 시스템 (SCMS - Student Competency Management System)</h1>
+                    <p class="hero-subtitle">대학 비교과 프로그램, 역량 개발, 진로 상담을 통합 관리하는 웹 플랫폼.</p>
+                    <p class="hero-description">각종 현수막, 포스터 홍보를 직접하세요.</p>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-bullhorn fa-5x"></i>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Icon Menu Section -->
+        <section class="icon-menu-section">
+            <div class="container">
+                <div class="icon-menu-grid">
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-chart-bar fa-2x"></i></div>
+                        <span class="icon-label">전체보기</span>
+                    </a>
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-lightbulb fa-2x"></i></div>
+                        <span class="icon-label">문제해결역량</span>
+                    </a>
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-user-check fa-2x"></i></div>
+                        <span class="icon-label">자기관리역량</span>
+                    </a>
+                    <a href="#" class="icon-menu-item">
+                        <div class="icon-circle"><i class="fas fa-users fa-2x"></i></div>
+                        <span class="icon-label">공감소통역량</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Programs Section -->
+        <section class="programs-section">
+            <div class="container">
+                <h2 class="section-title"><i class="fas fa-clipboard-list"></i> 전체 프로그램</h2>
+                <div class="program-grid" id="programGrid1"></div>
+            </div>
+        </section>
+        
+        <!-- Page Specific JavaScript -->
+        <script th:src="@{/js/main.js}"></script>
+    </div>
+</body>
+</html>
