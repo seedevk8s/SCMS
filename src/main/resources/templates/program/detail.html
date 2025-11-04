@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>프로그램 상세 - SCMS</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Program Detail Container -->
+        <div class="program-detail-page">
+            
+            <!-- Program Header -->
+            <section class="program-detail-header">
+                <div class="container">
+                    <div class="program-detail-banner">
+                        <!-- Placeholder Image -->
+                        <div class="program-banner-placeholder">
+                            <i class="fas fa-image fa-5x"></i>
+                        </div>
+                        
+                        <!-- Badge Overlay -->
+                        <div class="program-badge-overlay" id="programBadge">
+                            <span class="badge-lg">입박</span>
+                        </div>
+                    </div>
+                    
+                    <div class="program-detail-title-section">
+                        <div class="program-meta">
+                            <span class="program-center" id="programCenter">외국어교육지원센터</span>
+                            <button class="btn-favorite">
+                                <i class="far fa-heart"></i> 즐겨찾기
+                            </button>
+                        </div>
+                        <h1 class="program-detail-title" id="programTitle">
+                            2025-2학기 토익경시대회
+                        </h1>
+                        <p class="program-detail-subtitle" id="programSubtitle">
+                            [A] 2025-2학기 토익경시대회 [약학대학, 한의과대학, 간호대학]
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Application Info Box -->
+            <section class="application-info-section">
+                <div class="container">
+                    <div class="application-info-box">
+                        <div class="info-row">
+                            <div class="info-item">
+                                <i class="far fa-calendar"></i>
+                                <div class="info-content">
+                                    <span class="info-label">신청 기간</span>
+                                    <span class="info-value" id="applicationPeriod">
+                                        2025.09.15 ~ 2025.11.03
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-clock"></i>
+                                <div class="info-content">
+                                    <span class="info-label">운영 일시</span>
+                                    <span class="info-value" id="eventDate">
+                                        2025.11.16(화) 17:30 ~ 19:30
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-row">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="info-content">
+                                    <span class="info-label">장소</span>
+                                    <span class="info-value" id="location">온라인</span>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-users"></i>
+                                <div class="info-content">
+                                    <span class="info-label">모집 인원</span>
+                                    <span class="info-value" id="participants">
+                                        <strong class="current">10</strong> / 25명
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recruitment Progress -->
+                        <div class="recruitment-progress">
+                            <div class="progress-header">
+                                <span>참가 현황</span>
+                                <span class="progress-percentage" id="progressPercentage">40%</span>
+                            </div>
+                            <div class="progress-bar-wrapper">
+                                <div class="progress-bar" id="progressBar" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Apply Button -->
+                        <button class="btn btn-apply" id="applyButton">
+                            <i class="fas fa-pencil-alt"></i> 신청하기
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tab Menu -->
+            <section class="program-tabs-section">
+                <div class="container">
+                    <ul class="program-tabs">
+                        <li class="tab-item active" data-tab="intro">
+                            <a href="#intro">프로그램 소개</a>
+                        </li>
+                        <li class="tab-item" data-tab="status">
+                            <a href="#status">신청 현황</a>
+                        </li>
+                        <li class="tab-item" data-tab="notice">
+                            <a href="#notice">공지사항</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Tab Content -->
+            <section class="program-content-section">
+                <div class="container">
+                    <!-- Tab 1: 프로그램 소개 -->
+                    <div class="tab-content active" id="intro">
+                        <div class="program-detail-content">
+                            <h3>📋 프로그램 소개</h3>
+                            <div id="programContent">
+                                <p>토익 점수 향상을 위한 경시대회입니다. 우수 성적자에게는 장학금이 지급됩니다.</p>
+                                
+                                <h4>참여 대상</h4>
+                                <ul>
+                                    <li>약학대학, 한의과대학, 간호대학 재학생</li>
+                                    <li>토익 응시 경험자 우대</li>
+                                </ul>
+                                
+                                <h4>프로그램 일정</h4>
+                                <ul>
+                                    <li>신청 기간: 2025.09.15 ~ 2025.11.03</li>
+                                    <li>대회 일시: 2025.11.16(화) 17:30 ~ 19:30</li>
+                                    <li>결과 발표: 2025.11.20(수)</li>
+                                </ul>
+                                
+                                <h4>준비물</h4>
+                                <ul>
+                                    <li>신분증 (학생증)</li>
+                                    <li>필기구</li>
+                                    <li>개인 노트북 (온라인 응시 시)</li>
+                                </ul>
+                                
+                                <h4>⚠️ 유의사항</h4>
+                                <ul>
+                                    <li>시험 시작 10분 전까지 입실 완료</li>
+                                    <li>무단 불참 시 향후 프로그램 신청 제한</li>
+                                    <li>부정행위 발견 시 즉시 퇴실 조치</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Attachments -->
+                            <div class="program-attachments">
+                                <h4><i class="fas fa-paperclip"></i> 첨부파일</h4>
+                                <ul class="attachment-list" id="attachmentList">
+                                    <li>
+                                        <a href="#" class="attachment-link">
+                                            <i class="far fa-file-pdf"></i>
+                                            <span>토익경시대회_안내문.pdf</span>
+                                            <span class="file-size">(1.2MB)</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 2: 신청 현황 -->
+                    <div class="tab-content" id="status">
+                        <div class="application-status-content">
+                            <h3>📊 신청 현황</h3>
+                            <div class="status-summary">
+                                <div class="status-card">
+                                    <div class="status-number">10</div>
+                                    <div class="status-label">신청 인원</div>
+                                </div>
+                                <div class="status-card">
+                                    <div class="status-number">25</div>
+                                    <div class="status-label">모집 인원</div>
+                                </div>
+                                <div class="status-card">
+                                    <div class="status-number">15</div>
+                                    <div class="status-label">잔여 인원</div>
+                                </div>
+                            </div>
+                            <p class="status-note">* 실시간 업데이트됩니다.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 3: 공지사항 -->
+                    <div class="tab-content" id="notice">
+                        <div class="program-notice-content">
+                            <h3>📢 공지사항</h3>
+                            <div class="notice-list" id="noticeList">
+                                <div class="notice-item">
+                                    <span class="notice-date">2025.11.01</span>
+                                    <span class="notice-text">토익경시대회 일정이 확정되었습니다.</span>
+                                </div>
+                                <div class="notice-item">
+                                    <span class="notice-date">2025.10.28</span>
+                                    <span class="notice-text">신청 기간이 연장되었습니다. (~ 11/03)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Manager Info -->
+            <section class="program-manager-section">
+                <div class="container">
+                    <div class="program-manager-box">
+                        <h3><i class="fas fa-user-tie"></i> 담당자 정보</h3>
+                        <div class="manager-info">
+                            <div class="manager-item">
+                                <span class="manager-label">담당 센터</span>
+                                <span class="manager-value" id="managerCenter">외국어교육지원센터</span>
+                            </div>
+                            <div class="manager-item">
+                                <span class="manager-label">담당자</span>
+                                <span class="manager-value" id="managerName">홍길동</span>
+                            </div>
+                            <div class="manager-item">
+                                <span class="manager-label">연락처</span>
+                                <span class="manager-value" id="managerPhone">02-1234-5678</span>
+                            </div>
+                            <div class="manager-item">
+                                <span class="manager-label">이메일</span>
+                                <span class="manager-value" id="managerEmail">contact@example.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Action Buttons -->
+            <section class="program-actions-section">
+                <div class="container">
+                    <div class="program-actions">
+                        <button class="btn btn-outline" onclick="history.back()">
+                            <i class="fas fa-list"></i> 목록으로
+                        </button>
+                        <button class="btn btn-primary btn-large" id="applyButtonBottom">
+                            <i class="fas fa-pencil-alt"></i> 신청하기
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+        
+        <!-- Page Specific CSS -->
+        <link rel="stylesheet" th:href="@{/css/program.css}">
+        
+        <!-- Page Specific JavaScript -->
+        <script th:src="@{/js/program-detail.js}"></script>
+    </div>
+</body>
+</html>

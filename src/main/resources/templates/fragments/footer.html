@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Footer Fragment -->
+    <footer th:fragment="footer" class="footer">                <!--재사용 가능한 Fragment 정의, 한 번 수정하면 모든 페이지에 자동 반영-->
+        <!-- Service Info Button -->
+        <div class="service-info-section">
+            <button class="btn-service-info">
+                서비스 안내 <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- Footer Menu -->
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-menu-group">
+                    <div class="footer-menu-column">
+                        <h3 class="footer-menu-title">비교과 프로그램</h3>
+                        <ul class="footer-menu-list">
+                            <li><a th:href="@{/programs}">전체</a></li>
+                            <li><a th:href="@{/programs/category/academic}">학습역량</a></li>
+                            <li><a th:href="@{/programs/category/career}">진로지도</a></li>
+                            <li><a th:href="@{/programs/category/counseling}">심리상담</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-column">
+                        <h3 class="footer-menu-title">마일리지</h3>
+                        <ul class="footer-menu-list">
+                            <li><a th:href="@{/mileage}">소개</a></li>
+                            <li><a th:href="@{/mileage/balance}">마일리지 현황</a></li>
+                            <li><a th:href="@{/mileage/transactions}">거래내역</a></li>
+                            <li><a th:href="@{/mileage/rules}">적립기준</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-column">
+                        <h3 class="footer-menu-title">통합상담</h3>
+                        <ul class="footer-menu-list">
+                            <li><a th:href="@{/counseling}">상담안내</a></li>
+                            <li><a th:href="@{/counseling/reservations}">상담예약</a></li>
+                            <li><a th:href="@{/counseling/sessions}">상담내역</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-column">
+                        <h3 class="footer-menu-title">자료실</h3>
+                        <ul class="footer-menu-list">
+                            <li><a th:href="@{/resources}">소개</a></li>
+                            <li><a th:href="@{/resources/documents}">자료실</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-column">
+                        <h3 class="footer-menu-title">역량진단</h3>
+                        <ul class="footer-menu-list">
+                            <li><a th:href="@{/competency}">핵심역량 안내</a></li>
+                            <li><a th:href="@{/competency/surveys}">진단하기</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-menu-column">
+                        <h3 class="footer-menu-title">포트폴리오</h3>
+                        <ul class="footer-menu-list">
+                            <li><a th:href="@{/portfolio}">교과활동</a></li>
+                            <li><a th:href="@{/portfolio/extracurricular}">포트폴리오</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Copyright -->
+                <div class="footer-copyright">
+                    <p>&copy; 2025 SCMS - 학생역량관리시스템. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
