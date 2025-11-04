@@ -48,4 +48,14 @@ public class MainViewController {
     public String programDetail() {
         return "program/detail";
     }
+    
+    /**
+     * 마일리지 현황 페이지
+     * 
+     * @return mileage/dashboard.html 템플릿
+     */
+    @GetMapping("/mileage")
+    public String mileageDashboard() {
+        return "mileage/dashboard";
+    }
 }

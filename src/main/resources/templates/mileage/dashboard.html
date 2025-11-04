@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>마일리지 현황 - SCMS</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title"><i class="fas fa-coins"></i> 마일리지 현황</h1>
+                <p class="page-description">비교과 활동 참여로 마일리지를 적립하고 다양한 혜택을 받으세요.</p>
+            </div>
+        </section>
+        
+        <!-- Mileage Summary Cards -->
+        <section class="mileage-summary">
+            <div class="container">
+                <div class="stats-grid">
+                    <!-- Current Balance -->
+                    <div class="stat-card primary">
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-label">보유 마일리지</h3>
+                            <p class="stat-value" id="currentBalance">0 P</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Earned -->
+                    <div class="stat-card success">
+                        <div class="stat-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-label">총 적립</h3>
+                            <p class="stat-value" id="totalEarned">0 P</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Used -->
+                    <div class="stat-card danger">
+                        <div class="stat-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-label">총 사용</h3>
+                            <p class="stat-value" id="totalUsed">0 P</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Expiring Soon -->
+                    <div class="stat-card warning">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 class="stat-label">소멸 예정</h3>
+                            <p class="stat-value" id="expiringSoon">0 P</p>
+                            <span class="stat-note">6개월 이내</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Monthly Trend Chart -->
+        <section class="mileage-chart">
+            <div class="container">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-chart-line"></i> 월별 마일리지 추이</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container" id="monthlyChart">
+                            <!-- Simple Bar Chart -->
+                            <div class="simple-chart">
+                                <div class="chart-bars" id="chartBars">
+                                    <!-- JavaScript로 동적 생성 -->
+                                </div>
+                                <div class="chart-legend">
+                                    <span class="legend-item">
+                                        <span class="legend-color earned"></span> 적립
+                                    </span>
+                                    <span class="legend-item">
+                                        <span class="legend-color used"></span> 사용
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recent Transactions -->
+        <section class="mileage-transactions">
+            <div class="container">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-history"></i> 최근 거래 내역</h2>
+                        <div class="card-actions">
+                            <select class="form-select-sm" id="transactionFilter">
+                                <option value="ALL">전체</option>
+                                <option value="EARN">적립</option>
+                                <option value="USE">사용</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="transaction-list" id="transactionList">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+                        <div class="card-footer text-center">
+                            <button class="btn btn-outline-primary" id="loadMoreBtn">
+                                더보기 <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mileage Guide -->
+        <section class="mileage-guide">
+            <div class="container">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fas fa-info-circle"></i> 마일리지 안내</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="guide-grid">
+                            <div class="guide-item">
+                                <div class="guide-icon earn">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <h3 class="guide-title">적립 방법</h3>
+                                <ul class="guide-list">
+                                    <li>비교과 프로그램 참여 (100~500P)</li>
+                                    <li>설문조사 참여 (50P)</li>
+                                    <li>상담 이용 (100P)</li>
+                                    <li>봉사활동 참여 (시간당 50P)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="guide-item">
+                                <div class="guide-icon use">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <h3 class="guide-title">사용 방법</h3>
+                                <ul class="guide-list">
+                                    <li>프로그램 신청 수수료</li>
+                                    <li>학내 카페테리아 이용</li>
+                                    <li>도서관 연체료 납부</li>
+                                    <li>학생복지 시설 이용권</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="guide-item">
+                                <div class="guide-icon info">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <h3 class="guide-title">유의사항</h3>
+                                <ul class="guide-list">
+                                    <li>마일리지는 적립일로부터 6개월간 유효</li>
+                                    <li>타인에게 양도 불가</li>
+                                    <li>졸업 시 자동 소멸</li>
+                                    <li>부정 사용 시 회수 및 제재 조치</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Page Specific JavaScript -->
+        <link rel="stylesheet" th:href="@{/css/mileage.css}">
+        <script th:src="@{/js/mileage.js}"></script>
+    </div>
+</body>
+</html>
