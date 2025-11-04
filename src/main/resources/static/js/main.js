@@ -2,14 +2,14 @@
 /* Main Page JavaScript */
 /* ==================== */
 
-// Mock Data
+// Mock Data - program-detail.js와 일치
 const MockData = {
     programs1: [
         {
             id: 1,
             title: '2025-2학기 토익경시대회',
             description: '[A] 2025-2학기 토익경시대회 [약학대학, 한의과대학, 간호대학]',
-            center: '외국어교육지원센터',
+            center: '학습역량개발센터',
             category: '입박',
             startDate: '2025.09.15',
             endDate: '2025.11.03',
@@ -22,48 +22,48 @@ const MockData = {
         },
         {
             id: 2,
-            title: '2025-2학기 토익경시대회',
-            description: '[B] 2025-2학기 토익경시대회 [그 외 대학]',
-            center: '외국어교육지원센터',
-            category: '입박',
-            startDate: '2025.09.15',
-            endDate: '2025.11.03',
-            eventDate: '2025.11.16(화) 17:30 ~ 19:30',
-            currentParticipants: 5,
+            title: 'AI 역량 강화 워크샵',
+            description: '인공지능 기초부터 응용까지 배우는 워크샵',
+            center: '진로개발센터',
+            category: '마감',
+            startDate: '2025.10.01',
+            endDate: '2025.10.31',
+            eventDate: '2025.11.05(수) 14:00 ~ 17:00',
+            currentParticipants: 25,
             maxParticipants: 25,
-            hits: 151,
-            badge: '입박',
-            badgeColor: '#e74c3c'
+            hits: 203,
+            badge: '마감',
+            badgeColor: '#95a5a6'
         },
         {
             id: 3,
-            title: '명칭스피치&이미지메이킹 1회차',
-            description: '2025년 2학기 명칭스피치&이미지메이킹 1회차',
-            center: '대학일자리본부',
-            category: '입박',
-            startDate: '2025.09.29',
-            endDate: '2025.11.03',
-            eventDate: '2025.11.05(수) 13:00 ~ 15:00',
-            currentParticipants: 17,
-            maxParticipants: 55,
-            hits: 157,
-            badge: '입박',
-            badgeColor: '#e74c3c'
+            title: '명칭스피치&이미지메이킹',
+            description: '효과적인 소통과 이미지 관리 방법을 배웁니다',
+            center: '학생지원센터',
+            category: '모집중',
+            startDate: '2025.09.20',
+            endDate: '2025.10.25',
+            eventDate: '2025.10.28(월) 15:00 ~ 18:00',
+            currentParticipants: 18,
+            maxParticipants: 30,
+            hits: 176,
+            badge: '모집중',
+            badgeColor: '#27ae60'
         },
         {
             id: 4,
             title: '2학기 계슈탑트 자기이해 성장캠프',
-            description: '재슈캠프 자기이해 성장캠프',
-            center: '학생상담센터',
+            description: '자기 이해와 성장을 위한 캠프 프로그램',
+            center: '상담센터',
             category: '입박',
-            startDate: '2025.10.20',
-            endDate: '2025.11.04',
-            eventDate: '2025.11.19(수) 13:00 ~ 15:00',
-            currentParticipants: 5,
-            maxParticipants: 9,
-            hits: 59,
+            startDate: '2025.10.10',
+            endDate: '2025.11.15',
+            eventDate: '2025.11.20(목) 10:00 ~ 16:00',
+            currentParticipants: 12,
+            maxParticipants: 20,
+            hits: 134,
             badge: '입박',
-            badgeColor: '#3498db'
+            badgeColor: '#e74c3c'
         }
     ]
 };

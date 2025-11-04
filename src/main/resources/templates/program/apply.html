@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>프로그램 신청 - SCMS</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Program Apply Container -->
+        <div class="program-apply-page">
+            
+            <!-- Page Header -->
+            <section class="apply-header">
+                <div class="container">
+                    <h1 class="page-title">
+                        <i class="fas fa-pencil-alt"></i> 프로그램 신청
+                    </h1>
+                    <p class="page-subtitle">신청 정보를 입력하고 제출해주세요</p>
+                </div>
+            </section>
+            
+            <!-- Apply Form -->
+            <section class="apply-form-section">
+                <div class="container">
+                    <form id="applyForm" class="apply-form">
+                        
+                        <!-- Step 1: 프로그램 정보 확인 -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="step-badge">STEP 1</span>
+                                프로그램 정보 확인
+                            </h2>
+                            
+                            <div class="program-info-box">
+                                <div class="program-info-header">
+                                    <span class="program-badge" id="programBadge">입박</span>
+                                    <h3 class="program-title" id="programTitle">2025-2학기 토익경시대회</h3>
+                                </div>
+                                
+                                <div class="program-info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">운영 센터</span>
+                                        <span class="info-value" id="programCenter">외국어교육지원센터</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">운영 일시</span>
+                                        <span class="info-value" id="eventDate">2025.11.16(화) 17:30 ~ 19:30</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">장소</span>
+                                        <span class="info-value" id="location">온라인</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">모집 인원</span>
+                                        <span class="info-value" id="participants">
+                                            <strong class="current">10</strong> / 25명
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: 신청자 정보 -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="step-badge">STEP 2</span>
+                                신청자 정보
+                            </h2>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="studentName">이름 <span class="required">*</span></label>
+                                    <input type="text" id="studentName" class="form-control" 
+                                           value="김철수" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="studentId">학번 <span class="required">*</span></label>
+                                    <input type="text" id="studentId" class="form-control" 
+                                           value="20231234" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="department">학과 <span class="required">*</span></label>
+                                    <input type="text" id="department" class="form-control" 
+                                           value="약학과" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="grade">학년 <span class="required">*</span></label>
+                                    <input type="text" id="grade" class="form-control" 
+                                           value="3학년" readonly>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="email">이메일 <span class="required">*</span></label>
+                                    <input type="email" id="email" class="form-control" 
+                                           value="student@example.com" required>
+                                    <span class="form-hint">결과 안내를 받으실 이메일을 입력해주세요</span>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="phone">연락처 <span class="required">*</span></label>
+                                    <input type="tel" id="phone" class="form-control" 
+                                           placeholder="010-1234-5678" required>
+                                    <span class="form-hint">긴급 연락 시 사용됩니다</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: 신청 정보 -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="step-badge">STEP 3</span>
+                                신청 정보
+                            </h2>
+                            
+                            <div class="form-group">
+                                <label for="motivation">신청 동기 <span class="required">*</span></label>
+                                <textarea id="motivation" class="form-control" rows="6" 
+                                          placeholder="프로그램에 참여하고자 하는 이유를 작성해주세요 (최소 50자, 최대 500자)"
+                                          required minlength="50" maxlength="500"></textarea>
+                                <div class="char-counter">
+                                    <span id="charCount">0</span> / 500자 (최소 50자)
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="expectations">기대 효과</label>
+                                <textarea id="expectations" class="form-control" rows="4" 
+                                          placeholder="프로그램을 통해 얻고자 하는 것을 작성해주세요 (선택사항, 최대 300자)"
+                                          maxlength="300"></textarea>
+                                <div class="char-counter">
+                                    <span id="expectCharCount">0</span> / 300자
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Questions (if any) -->
+                            <div class="form-group">
+                                <label for="toeicScore">최근 토익 점수</label>
+                                <input type="number" id="toeicScore" class="form-control" 
+                                       placeholder="점수를 입력해주세요 (선택사항)" 
+                                       min="0" max="990">
+                                <span class="form-hint">최근 1년 이내 점수를 입력해주세요</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: 동의 사항 -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="step-badge">STEP 4</span>
+                                동의 사항
+                            </h2>
+                            
+                            <div class="agreement-box">
+                                <div class="agreement-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="agreeAll" class="agreement-checkbox">
+                                        <span class="checkbox-text">전체 동의</span>
+                                    </label>
+                                </div>
+                                
+                                <hr class="divider">
+                                
+                                <div class="agreement-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="agreement-checkbox required-agreement" required>
+                                        <span class="checkbox-text">
+                                            [필수] 개인정보 수집 및 이용 동의
+                                            <button type="button" class="btn-detail" data-modal="privacy">
+                                                상세보기
+                                            </button>
+                                        </span>
+                                    </label>
+                                </div>
+                                
+                                <div class="agreement-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="agreement-checkbox required-agreement" required>
+                                        <span class="checkbox-text">
+                                            [필수] 프로그램 운영 규정 동의
+                                            <button type="button" class="btn-detail" data-modal="rules">
+                                                상세보기
+                                            </button>
+                                        </span>
+                                    </label>
+                                </div>
+                                
+                                <div class="agreement-item">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="agreement-checkbox">
+                                        <span class="checkbox-text">
+                                            [선택] 프로그램 관련 알림 수신 동의
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline btn-large" onclick="history.back()">
+                                <i class="fas fa-times"></i> 취소
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <i class="fas fa-check"></i> 신청하기
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </section>
+            
+        </div>
+        
+        <!-- Modals -->
+        <!-- Privacy Policy Modal -->
+        <div id="privacyModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>개인정보 수집 및 이용 동의</h3>
+                    <button type="button" class="modal-close" data-close="privacyModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="terms-content">
+                        <h4>1. 개인정보의 수집 및 이용 목적</h4>
+                        <p>프로그램 신청자 관리, 프로그램 운영, 결과 안내</p>
+                        
+                        <h4>2. 수집하는 개인정보의 항목</h4>
+                        <p>이름, 학번, 학과, 학년, 이메일, 연락처</p>
+                        
+                        <h4>3. 개인정보의 보유 및 이용 기간</h4>
+                        <p>프로그램 종료 후 1년</p>
+                        
+                        <h4>4. 동의를 거부할 권리 및 거부 시 불이익</h4>
+                        <p>귀하는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며, 
+                           동의를 거부할 경우 프로그램 신청이 제한됩니다.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-close="privacyModal">
+                        확인
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rules Modal -->
+        <div id="rulesModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>프로그램 운영 규정</h3>
+                    <button type="button" class="modal-close" data-close="rulesModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="terms-content">
+                        <h4>제1조 (목적)</h4>
+                        <p>본 규정은 프로그램의 원활한 운영을 위한 기본 사항을 정함을 목적으로 합니다.</p>
+                        
+                        <h4>제2조 (참여 의무)</h4>
+                        <p>신청자는 프로그램 일정에 성실히 참여해야 하며, 
+                           부득이한 사유로 불참할 경우 사전에 담당자에게 통보해야 합니다.</p>
+                        
+                        <h4>제3조 (무단 불참)</h4>
+                        <p>정당한 사유 없이 2회 이상 무단 불참할 경우 향후 프로그램 신청이 제한될 수 있습니다.</p>
+                        
+                        <h4>제4조 (부정행위 금지)</h4>
+                        <p>프로그램 참여 중 부정행위가 발견될 경우 즉시 퇴실 조치되며, 
+                           관련 불이익을 받을 수 있습니다.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-close="rulesModal">
+                        확인
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page Specific CSS -->
+        <link rel="stylesheet" th:href="@{/css/program.css}">
+        
+        <!-- Page Specific JavaScript -->
+        <script th:src="@{/js/program-apply.js}"></script>
+    </div>
+</body>
+</html>

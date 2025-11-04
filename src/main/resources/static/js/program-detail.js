@@ -192,10 +192,12 @@ function initTabs() {
 // Apply Button Handler
 function initApplyButtons() {
     const applyButtons = document.querySelectorAll('#applyButton, #applyButtonBottom');
+    const programId = getProgramId();
     
     applyButtons.forEach(button => {
         button.addEventListener('click', () => {
-            alert('신청 기능은 Phase 5에서 구현됩니다.');
+            // 신청 페이지로 이동 (programId를 쿼리 파라미터로 전달)
+            window.location.href = `/program/apply?id=${programId}`;
         });
     });
 }

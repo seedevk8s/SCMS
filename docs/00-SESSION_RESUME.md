@@ -1,338 +1,280 @@
-# SCMS 프로젝트 세션 재개 가이드
+# SCMS Phase 3 View Layer - 세션 재개 문서
 
-## 🎯 현재 프로젝트 상태
-
-### 프로젝트명
-**SCMS (Student Competency Management System)** - 학생 역량 관리 시스템
-
-### 프로젝트 위치
-```
-C:\Users\USER\Documents\choongang\Project\scms\scms-backend
-```
-
-### 현재 Phase
-**Repository Layer 개발 진행 중** - 6개 Repository 완료 (33%)
-
-### 현재 Git 브랜치
-**main** (최신 커밋: dc5ad05)
-
-### GitHub 저장소
-```
-https://github.com/seedevk8s/SCMS.git
-```
+**작성일**: 2025-11-04
+**세션 종료 시점**: 토큰 사용률 56.8% (107,844/190,000)
 
 ---
 
-## ✅ 완료된 작업 요약
+## ✅ 현재까지 완료된 작업 (5개 화면)
 
-### 1. 프로젝트 설정
-- ✅ Spring Boot 3.5.7 + Gradle 프로젝트 생성
-- ✅ MySQL 연결 (scms_db)
-- ✅ 모든 필수 의존성 설정 완료
-- ✅ JPA Auditing 설정 완료
+### 1. 공통 모듈
+- ✅ Header Fragment (`fragments/header.html`)
+- ✅ Footer Fragment (`fragments/footer.html`)
+- ✅ Default Layout (`layouts/default.html`)
 
-### 2. 기본 구조
-- ✅ 도메인별 패키지 구조
-- ✅ SecurityConfig 생성 (JWT 준비)
-- ✅ HealthCheckController 구현
-- ✅ 전역 예외 처리 설정
+### 2. 메인 페이지
+- ✅ `index.html` - 메인 홈 화면
+- ✅ Hero Section (3개 자동 슬라이드, 5초 간격)
+- ✅ Icon Menu (4개 역량 아이콘)
+- ✅ 전체 프로그램 섹션
 
-### 3. 아키텍처 결정
-- ✅ **Modular Monolith** 방식 채택
-- ✅ MSA 전환 가능하도록 설계 원칙 적용
-- ✅ 도메인별 명확한 경계 설정
-- ✅ **하이브리드 JPA 전략**
-  - 같은 도메인: JPA 관계 매핑 (외래키 NO_CONSTRAINT)
-  - 다른 도메인: Long ID만 참조
+### 3. 프로그램 목록 페이지
+- ✅ `program/list.html` - URL: `/programs`
+- ✅ 검색/필터링 UI
+- ✅ 프로그램 카드 그리드
+- ✅ 페이징 섹션
 
-### 4. ERD 설계 ✅
-- ✅ 전체 도메인 테이블 설계 완료 (30개 테이블)
-- ✅ ERD 다이어그램 작성
-- ✅ 인덱스 전략 정의
-- ✅ MSA 전환 시나리오 문서화
+### 4. 프로그램 상세 페이지
+- ✅ `program/detail.html` - URL: `/programs/{id}`
+- ✅ 프로그램 정보, 신청 현황, 탭 메뉴
+- ✅ 신청 버튼 (아직 Mock 처리만)
 
-### 5. Entity Layer - 100% 완료 ✅
-- ✅ 모든 도메인 Entity 30개 구현 완료
-- ✅ 도메인별 패키지 구조 리팩토링 완료
-- ✅ Factory Method, Builder 패턴 적용
-- ✅ 비즈니스 로직 메서드 구현
-
-### 6. Repository Layer - 진행 중 (33% 완료) 🔄
-
-#### ✅ 완료된 Repository (6개)
-
-##### Auth Domain (1개)
-- ✅ **UserRepository** (22 tests)
-  - username, email, studentId, employeeId 조회
-  - 역할별, 학과별, 학년별 조회
-  - 검색 및 통계 메서드
-
-##### Common Domain (1개)
-- ✅ **CommonCodeRepository** (27 tests)
-  - 코드 그룹별 조회
-  - 계층 구조 조회
-  - 활성화 상태별 조회
-
-##### Program Domain (4개)
-- ✅ **ProgramApplicationRepository** (31 tests)
-  - 상태별 조회 (PENDING, APPROVED, REJECTED, CANCELLED)
-  - 검토 관련 조회, 날짜 기반 조회, 통계 집계
-  
-- ✅ **ProgramParticipantRepository** (39 tests)
-  - 출석 상태별 조회 (REGISTERED, ATTENDED, ABSENT)
-  - 마일리지 관련 조회, 후기/평가 조회, 통계
-  
-- ✅ **ProgramSatisfactionRepository** (41 tests)
-  - 평점별 조회, 주관식 응답 조회
-  - 추천 의향 조회, 다양한 평균 통계
-  
-- ✅ **ProgramCategoryRepository** (40 tests)
-  - 활성화 상태별 조회, Soft Delete 관리
-  - 프로그램 수 기반 조회, 표시 순서 관리
-
-**총 테스트: 200개 작성 및 통과** ✅
-
-#### ⏳ 진행 예정 (12개)
-- ⏳ ProgramRepository (테스트 작성 대기)
-- ⏳ ProgramCompetencyRepository
-- ⏳ Mileage Domain (2개)
-- ⏳ Competency Domain (3개)
-- ⏳ Counseling Domain (3개)
-- ⏳ Career Domain (2개)
-
-### 7. 문서화
-- ✅ README.md
-- ✅ PROJECT_SETUP_GUIDE.md
-- ✅ MSA_ARCHITECTURE_GUIDE.md
-- ✅ ERD 설계 문서
-- ✅ Repository 구현 상태 문서
-- ✅ 세션 재개 가이드 (이 문서)
-
-### 8. Git 버전 관리
-- ✅ 모든 Entity 브랜치 머지 완료
-- ✅ Repository Phase 2-2 완료 및 머지
-- ✅ main 브랜치 최신화 (dc5ad05)
-- ✅ GitHub 푸시 완료
+### 5. 마일리지 현황 페이지
+- ✅ `mileage/dashboard.html`
+- ✅ 학기별 통계, 차트, 적립 내역
 
 ---
 
-## 💬 세션 재개 시 사용할 멘트
+## 🔧 방금 완료한 중요 작업
 
-### 📌 추천 멘트 (복사해서 사용)
+### Mock 데이터 동기화 완료!
 
-```
-다음 내용으로 작업 재개:
-1. 프로젝트 경로: C:\Users\USER\Documents\choongang\Project\scms\scms-backend
-2. 현재 브랜치: main (최신 커밋: 591f8e6)
-3. 완료: Program Domain Repository 4개 + 테스트 200개 완전 종료
-4. 다음 작업: Mileage Domain 시작
-5. 참고 문서: docs/01-progress/03-repository-implementation-status.md
+**문제**: 메인 페이지와 상세 페이지의 Mock 데이터가 불일치
+- 메인에서 2번 프로그램 클릭 → 다른 내용 표시됨
 
-Repository Layer 이어서 진행해
-```
-
-### 간단 버전
-
-```
-SCMS Repository 작업 재개
-완료: Program Domain Repository 4개 + 테스트 200개 종료 ✅
-다음: Mileage Domain 시작
-브랜치: main (591f8e6)
+**해결**: `main.js` 수정 완료
+```javascript
+// main.js의 ID 2번을 수정
+{
+    id: 2,
+    title: 'AI 역량 강화 워크샵',  // 변경됨
+    description: '인공지능 기초부터 응용까지 배우는 워크샵',
+    center: '진로개발센터',
+    badge: '마감',
+    ...
+}
 ```
 
-### 초간단 버전
-
-```
-Repository 이어서 하자
-완료: Program 4개 + 테스트 200개
-다음: Mileage 시작
-```
+**현재 상태**: 3개 파일 Mock 데이터 일치 ✅
+- `main.js` (메인 페이지)
+- `program-list.js` (목록 페이지)
+- `program-detail.js` (상세 페이지)
 
 ---
 
-## 📊 현재 진행률
+## 🎯 다음 작업: 프로그램 신청 페이지
 
-### Repository Layer: 33% (6/18)
+### 구현할 페이지
+**파일**: `src/main/resources/templates/program/apply.html`
+**URL**: `/programs/{id}/apply` 또는 `/programs/apply?id={id}`
 
+### 연결 흐름
 ```
-✅ Auth Domain:     1/1  (100%)
-✅ Common Domain:   1/1  (100%)
-🔄 Program Domain:  4/6  (67%)
-⏳ Mileage Domain:  0/2  (0%)
-⏳ Competency:      0/3  (0%)
-⏳ Counseling:      0/3  (0%)
-⏳ Career:          0/2  (0%)
-```
-
-### 테스트 현황
-
-```
-총 테스트: 200개
-- UserRepository: 22개
-- CommonCodeRepository: 27개
-- ProgramApplicationRepository: 31개
-- ProgramParticipantRepository: 39개
-- ProgramSatisfactionRepository: 41개
-- ProgramCategoryRepository: 40개
+프로그램 상세 페이지 (program/detail.html)
+    ↓
+신청 버튼 클릭 (#applyButton, #applyButtonBottom)
+    ↓
+프로그램 신청 페이지 (program/apply.html) ← 이것을 만들어야 함!
 ```
 
----
+### 구현 내용
+1. **신청 폼**
+   - 학생 정보 (자동 입력 - 김철수, 2024001234)
+   - 신청 사유 (Textarea)
+   - 개인정보 수집 동의 (Checkbox)
 
-## 🎯 다음 작업
+2. **Mock 처리**
+   - 제출 버튼 클릭 → alert('신청이 완료되었습니다')
+   - 신청 이력 페이지로 이동 (나중에 구현)
 
-### ✅ 완료 (2025-11-02)
-- **Program Domain 6개 Repository 완전 종료**
-  - 4개 Repository 테스트 200개 작성 및 통과
-  - Git 커밋 및 푸시 완료
-
-### 우선순위 1: Mileage Domain 시작
-1. **MileageTransactionRepository 구현**
-2. **MileageRuleRepository 구현**
-
-### 우선순위 2: Competency Domain
-5. CompetencySurveyRepository 구현
-6. SurveyQuestionRepository 구현
-7. CompetencyResultRepository 구현
+3. **유효성 검사**
+   - 필수 입력 체크
+   - 신청 사유 최소 10자 이상
 
 ---
 
 ## 📂 주요 파일 위치
 
-### 문서 파일
+### Templates
 ```
-docs/
-├── 00-SESSION_RESUME.md                           # 이 문서
-├── 01-progress/
-│   ├── 01-phase1-foundation.md
-│   └── 03-repository-implementation-status.md     # Repository 진행 상황
-└── 02-design/
-    └── 01-erd-design.md
-```
-
-### Repository 파일
-```
-src/main/java/com/university/scms/domain/
-├── auth/repository/
-│   └── UserRepository.java                        # ✅ 완료 (22 tests)
-├── common/repository/
-│   └── CommonCodeRepository.java                  # ✅ 완료 (27 tests)
-└── program/repository/
-    ├── ProgramRepository.java                     # ⏳ 테스트 대기
-    ├── ProgramApplicationRepository.java          # ✅ 완료 (31 tests)
-    ├── ProgramParticipantRepository.java          # ✅ 완료 (39 tests)
-    ├── ProgramSatisfactionRepository.java         # ✅ 완료 (41 tests)
-    ├── ProgramCategoryRepository.java             # ✅ 완료 (40 tests)
-    └── ProgramCompetencyRepository.java           # ⏳ 미구현
+src/main/resources/templates/
+├── fragments/
+│   ├── header.html
+│   └── footer.html
+├── layouts/
+│   └── default.html
+├── index.html (메인)
+├── program/
+│   ├── list.html (목록)
+│   ├── detail.html (상세)
+│   └── apply.html (신청) ← 다음 작업
+└── mileage/
+    └── dashboard.html
 ```
 
-### 테스트 파일
+### JavaScript
 ```
-src/test/java/com/university/scms/domain/
-├── auth/repository/
-│   └── UserRepositoryTest.java                    # ✅ 22 tests
-├── common/repository/
-│   └── CommonCodeRepositoryTest.java              # ✅ 27 tests
-└── program/repository/
-    ├── ProgramApplicationRepositoryTest.java      # ✅ 31 tests
-    ├── ProgramParticipantRepositoryTest.java      # ✅ 39 tests
-    ├── ProgramSatisfactionRepositoryTest.java     # ✅ 41 tests
-    └── ProgramCategoryRepositoryTest.java         # ✅ 40 tests
+src/main/resources/static/js/
+├── common.js
+├── main.js (메인 페이지)
+├── program-list.js (목록)
+├── program-detail.js (상세)
+└── program-apply.js (신청) ← 다음 작업
+```
+
+### CSS
+```
+src/main/resources/static/css/
+├── common.css
+├── layout.css
+├── main.css
+└── program.css
 ```
 
 ---
 
-## 📋 최근 커밋 이력
+## 📊 화면 플로우 다이어그램
+
+완성된 SVG: `docs/03-implementation/03-current-progress-flow.svg`
 
 ```
-dc5ad05 Merge: Program Domain Repository 테스트 구현 완료
-f66dc44 feat: Program Domain Repository 테스트 구현 완료 (4개, 200 tests)
-d4e3d29 feat: Program Domain Repository 4개 구현
+메인 (localhost:8080)
+    ↓ [비교과 프로그램 메뉴]
+프로그램 목록 (localhost:8080/programs)
+    ↓ [카드 클릭]
+프로그램 상세 (localhost:8080/programs/2)
+    ↓ [신청 버튼 클릭]
+프로그램 신청 (localhost:8080/programs/2/apply) ← 다음 구현
+    ↓ [제출 완료]
+신청 이력 (localhost:8080/programs/history) ← 향후 구현
 ```
 
 ---
 
-## ⚙️ 환경 정보
+## 📈 진행률
 
-### 개발 환경
-- **IDE**: IntelliJ IDEA
-- **Java**: 17
-- **Gradle**: 8.5
-- **Spring Boot**: 3.5.7
+**Week 1-2 목표: 비교과 프로그램 완성 (9개 화면)**
 
-### 데이터베이스
-- **DBMS**: MySQL 8.0
-- **Database**: scms_db
-- **Port**: 3306
-- **Username**: root
+| 항목 | 상태 | 비고 |
+|------|------|------|
+| 공통 모듈 | ✅ 완료 | Header/Footer/Layout |
+| 메인 페이지 | ✅ 완료 | index.html |
+| 프로그램 목록 | ✅ 완료 | program/list.html |
+| 프로그램 상세 | ✅ 완료 | program/detail.html |
+| 마일리지 현황 | ✅ 완료 | mileage/dashboard.html |
+| **프로그램 신청** | 🔄 다음 작업 | program/apply.html |
+| 신청 취소 | ⏳ 대기 | program/cancel.html |
+| 신청 이력 | ⏳ 대기 | program/history.html |
+| 이수내역 | ⏳ 대기 | program/completion.html |
 
-### 서버
-- **Port**: 8080
-- **Base URL**: http://localhost:8080
-
-### Git
-- **현재 브랜치**: main
-- **최신 커밋**: dc5ad05
-- **저장소**: https://github.com/seedevk8s/SCMS.git
+**현재 진행률**: 55.6% (5/9 완료)
 
 ---
 
-## 🎯 개발 원칙
+## 🎨 프로그램 신청 페이지 레퍼런스
 
-### 1. MSA 전환 대비
-- 같은 도메인 내: JPA 관계 매핑 (외래키 NO_CONSTRAINT)
-- 다른 도메인 간: Long ID만 참조
+### UI 구성 (참고: https://champ.woosuk.ac.kr/ko/)
+1. **Page Header**
+   - 제목: "프로그램 신청"
+   - 프로그램명 표시
 
-### 2. Repository 설계 패턴
-```java
-// 기본 조회
-Optional<Entity> findByXxx(Type xxx);
-List<Entity> findByXxx(Type xxx);
+2. **신청 정보 박스**
+   - 프로그램명
+   - 신청 기간
+   - 운영 일시
+   - 장소
 
-// 상태별 조회
-List<Entity> findByStatus(Status status);
+3. **신청자 정보 (읽기 전용)**
+   - 이름: 김철수
+   - 학번: 2024001234
+   - 학과: 컴퓨터공학과
+   - 연락처: 010-1234-5678
 
-// 통계
-long countByXxx(Type xxx);
-Double getAverageXxx();
+4. **신청 사유 (필수)**
+   - Textarea (최소 10자)
 
-// 존재 여부
-boolean existsByXxx(Type xxx);
+5. **개인정보 수집 동의 (필수)**
+   - Checkbox
+
+6. **제출 버튼**
+   - "신청하기" (파란색)
+   - "취소" (회색)
+
+---
+
+## 💡 코딩 시작 방법
+
+### 1단계: Feature Branch 생성
+```bash
+cd C:/Users/USER/Documents/choongang/Project/scms/scms-backend
+git checkout -b feature/program-apply-page
 ```
 
-### 3. 테스트 작성 원칙
-- @DataJpaTest 사용
-- 실제 MySQL DB 테스트
-- @Import(JpaConfig.class) 포함
-- 기본 CRUD + 커스텀 쿼리 + 비즈니스 로직 검증
+### 2단계: HTML 파일 생성
+```
+src/main/resources/templates/program/apply.html
+```
+
+### 3단계: JavaScript 파일 생성
+```
+src/main/resources/static/js/program-apply.js
+```
+
+### 4단계: Mock 데이터 준비
+- program-detail.js에서 프로그램 정보 가져오기
+- 학생 정보는 하드코딩
+
+### 5단계: 신청 버튼 연결
+`program-detail.js` 수정:
+```javascript
+applyButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const programId = getProgramId();
+        window.location.href = `/programs/${programId}/apply`;
+    });
+});
+```
 
 ---
 
-## 📝 작업 체크리스트
+## ⚠️ 주의사항
 
-### ✅ 완료
-- [x] Entity Layer 100% (30개)
-- [x] Repository Layer 33% (6개)
-- [x] 테스트 200개 작성 및 통과
-- [x] 문서화 완료
+1. **Thymeleaf Fragment 패턴 사용**
+   - `th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}"`
 
-### 🔄 진행 중
-- [ ] Repository Layer 완성 (12개 남음)
+2. **Mock 데이터 일관성 유지**
+   - 3개 JS 파일의 프로그램 정보 동일하게 유지
 
-### ⏳ 예정
-- [ ] Service Layer 구현
-- [ ] Controller Layer 구현
-- [ ] Spring Security + JWT 인증
-- [ ] API 문서화 (Swagger)
+3. **Phase 3 원칙**
+   - 실제 API 연동 없음
+   - alert()로 완료 처리
+   - Mock 데이터만 사용
 
----
-
-**작성일**: 2025-11-02  
-**다음 작업**: ProgramRepository 테스트 또는 ProgramCompetencyRepository 구현  
-**진행률**: Repository 33% (6/18), 테스트 200개 통과  
-**최종 업데이트**: 2025-11-02 23:00
+4. **Git 워크플로우**
+   - Feature Branch 사용
+   - 완성 후 test → commit → merge → push
 
 ---
 
-**세션 재개 준비 완료! 🚀**
-**현재 브랜치: main (dc5ad05)**
-**다음 단계: Repository Layer 계속 구현**
+## 🔗 참고 문서
+
+- `docs/03-implementation/01-thymeleaf-fragment-guide.md`
+- `docs/03-implementation/02-screen-implementation-roadmap.svg`
+- `docs/03-implementation/03-current-progress-flow.svg`
+- `docs/01-progress/05-phase3-view-layer-step1.md`
+
+---
+
+## 📞 문의사항
+
+**다음 세션 시작 시 확인사항:**
+1. Mock 데이터 동기화 확인 (메인 → 목록 → 상세)
+2. 프로그램 신청 페이지 UI 디자인 확정
+3. 신청 완료 후 이동 경로 결정
+
+**예상 소요 시간**: 프로그램 신청 페이지 약 4시간
+
+---
+
+**다음 세션 시작 멘트:**
+"이전 세션에서 Mock 데이터 동기화 완료했고, 지금부터 프로그램 신청 페이지(program/apply.html) 만들면 됩니다!"
