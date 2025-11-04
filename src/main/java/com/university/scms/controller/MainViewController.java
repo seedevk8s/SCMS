@@ -39,6 +39,26 @@ public class MainViewController {
     }
     
     /**
+     * 프로그램 목록 페이지 (대체 경로)
+     * 
+     * @return program/list.html 템플릿
+     */
+    @GetMapping("/program/list")
+    public String programListAlt() {
+        return "program/list";
+    }
+    
+    /**
+     * 프로그램 신청 이력 페이지
+     * 
+     * @return program/history.html 템플릿
+     */
+    @GetMapping("/program/history")
+    public String programHistory() {
+        return "program/history";
+    }
+    
+    /**
      * 프로그램 상세 페이지
      * 
      * @param id 프로그램 ID

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <header th:fragment="header" class="header">                <!--재사용 가능한 Fragment 정의, 한 번 수정하면 모든 페이지에 자동 반영-->
+    <header th:fragment="header" class="header">
         <div class="container-fluid">
             <div class="header-wrapper">
                 <div class="logo">
@@ -13,7 +13,21 @@
                 
                 <nav class="main-nav">
                     <ul class="nav-list">
-                        <li class="nav-item"><a th:href="@{/programs}" class="nav-link">비교과 프로그램</a></li>
+                        <!-- 비교과 프로그램 - 드롭다운 메뉴 -->
+                        <li class="nav-item has-dropdown">
+                            <a href="javascript:void(0)" class="nav-link dropdown-toggle">
+                                비교과 프로그램 <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{/program/list}" class="dropdown-item">
+                                    <i class="fas fa-list"></i> 프로그램 전체보기
+                                </a></li>
+                                <li><a th:href="@{/program/history}" class="dropdown-item">
+                                    <i class="fas fa-history"></i> MY 프로그램
+                                </a></li>
+                            </ul>
+                        </li>
+                        
                         <li class="nav-item"><a th:href="@{/mileage}" class="nav-link">마일리지</a></li>
                         <li class="nav-item"><a th:href="@{/counseling}" class="nav-link">통합상담</a></li>
                         <li class="nav-item"><a th:href="@{/competency}" class="nav-link">역량진단</a></li>
