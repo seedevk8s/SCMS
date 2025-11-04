@@ -21,6 +21,13 @@ spring:
     user:
       name: admin
       password: admin
+  
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
 
 # JWT Configuration
 jwt:

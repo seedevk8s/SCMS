@@ -31,23 +31,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // CSRF 비활성화 (JWT 사용 시)
+            // CSRF 비활성화 (개발 중)
             .csrf(csrf -> csrf.disable())
             
-            // 세션 사용 안 함 (Stateless)
-            .sessionManagement(session -> 
-                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )
-            
-            // 요청에 대한 인증/인가 설정
+            // 모든 요청 허용 (개발 중)
             .authorizeHttpRequests(auth -> auth
-                // 인증 없이 접근 가능한 경로
-                .requestMatchers("/api/health").permitAll()          // 헬스 체크
-                .requestMatchers("/api/auth/**").permitAll()         // 인증 API (로그인, 회원가입)
-                .requestMatchers("/error").permitAll()               // 에러 페이지
-                
-                // 나머지 요청은 인증 필요
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             );
 
         return http.build();
