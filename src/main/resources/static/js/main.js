@@ -3,69 +3,129 @@
 /* ==================== */
 
 // Mock Data - program-detail.js와 일치
+const PROGRAMS = [
+    {
+        id: 1,
+        title: '2025-2학기 토익경시대회',
+        description: '[A] 2025-2학기 토익경시대회 [약학대학, 한의과대학, 간호대학]',
+        center: '학습역량개발센터',
+        category: '입박',
+        startDate: '2025.09.15',
+        endDate: '2025.11.03',
+        date: '2025.11.16(화) 17:30 ~ 19:30',
+        eventDate: '2025.11.16(화) 17:30 ~ 19:30',
+        location: '온라인',
+        current: 10,
+        currentParticipants: 10,
+        capacity: 25,
+        maxParticipants: 25,
+        hits: 151,
+        badge: '입박',
+        badgeColor: '#e74c3c'
+    },
+    {
+        id: 5,
+        title: '창업 아이디어 경진대회',
+        description: '혁신적인 창업 아이디어를 발굴하는 대회',
+        center: '창업지원센터',
+        category: '모집중',
+        startDate: '2025.09.01',
+        endDate: '2025.11.30',
+        date: '2025.12.05(금) 13:00 ~ 18:00',
+        eventDate: '2025.12.05(금) 13:00 ~ 18:00',
+        location: '창업보육센터 컨퍼런스홀',
+        current: 8,
+        currentParticipants: 8,
+        capacity: 15,
+        maxParticipants: 15,
+        hits: 98,
+        badge: '모집중',
+        badgeColor: '#27ae60'
+    },
+    {
+        id: 6,
+        title: '글로벌 리더십 프로그램',
+        description: '국제적 감각과 리더십을 키우는 프로그램',
+        center: '국제교류센터',
+        category: '완료',
+        startDate: '2025.08.15',
+        endDate: '2025.09.30',
+        date: '2025.10.10(목) 09:00 ~ 18:00',
+        eventDate: '2025.10.10(목) 09:00 ~ 18:00',
+        location: '국제회의실',
+        current: 20,
+        currentParticipants: 20,
+        capacity: 20,
+        maxParticipants: 20,
+        hits: 245,
+        badge: '완료',
+        badgeColor: '#3498db'
+    },
+    {
+        id: 2,
+        title: 'AI 역량 강화 워크샵',
+        description: '인공지능 기초부터 응용까지 배우는 워크샵',
+        center: '진로개발센터',
+        category: '마감',
+        startDate: '2025.10.01',
+        endDate: '2025.10.31',
+        date: '2025.11.05(수) 14:00 ~ 17:00',
+        eventDate: '2025.11.05(수) 14:00 ~ 17:00',
+        location: '공학관 302호',
+        current: 25,
+        currentParticipants: 25,
+        capacity: 25,
+        maxParticipants: 25,
+        hits: 203,
+        badge: '마감',
+        badgeColor: '#95a5a6'
+    },
+    {
+        id: 3,
+        title: '명칭스피치&이미지메이킹',
+        description: '효과적인 소통과 이미지 관리 방법을 배웁니다',
+        center: '학생지원센터',
+        category: '모집중',
+        startDate: '2025.09.20',
+        endDate: '2025.10.25',
+        date: '2025.10.28(월) 15:00 ~ 18:00',
+        eventDate: '2025.10.28(월) 15:00 ~ 18:00',
+        location: '학생회관 대강당',
+        current: 18,
+        currentParticipants: 18,
+        capacity: 30,
+        maxParticipants: 30,
+        hits: 176,
+        badge: '모집중',
+        badgeColor: '#27ae60'
+    },
+    {
+        id: 4,
+        title: '2학기 계슈탑트 자기이해 성장캠프',
+        description: '자기 이해와 성장을 위한 캠프 프로그램',
+        center: '상담센터',
+        category: '입박',
+        startDate: '2025.10.10',
+        endDate: '2025.11.15',
+        date: '2025.11.20(목) 10:00 ~ 16:00',
+        eventDate: '2025.11.20(목) 10:00 ~ 16:00',
+        location: '수련관 세미나실',
+        current: 12,
+        currentParticipants: 12,
+        capacity: 20,
+        maxParticipants: 20,
+        hits: 134,
+        badge: '입박',
+        badgeColor: '#e74c3c'
+    }
+];
+
+// Export to window for use in other scripts
+window.PROGRAMS = PROGRAMS;
+
+// Legacy support
 const MockData = {
-    programs1: [
-        {
-            id: 1,
-            title: '2025-2학기 토익경시대회',
-            description: '[A] 2025-2학기 토익경시대회 [약학대학, 한의과대학, 간호대학]',
-            center: '학습역량개발센터',
-            category: '입박',
-            startDate: '2025.09.15',
-            endDate: '2025.11.03',
-            eventDate: '2025.11.16(화) 17:30 ~ 19:30',
-            currentParticipants: 10,
-            maxParticipants: 25,
-            hits: 151,
-            badge: '입박',
-            badgeColor: '#e74c3c'
-        },
-        {
-            id: 2,
-            title: 'AI 역량 강화 워크샵',
-            description: '인공지능 기초부터 응용까지 배우는 워크샵',
-            center: '진로개발센터',
-            category: '마감',
-            startDate: '2025.10.01',
-            endDate: '2025.10.31',
-            eventDate: '2025.11.05(수) 14:00 ~ 17:00',
-            currentParticipants: 25,
-            maxParticipants: 25,
-            hits: 203,
-            badge: '마감',
-            badgeColor: '#95a5a6'
-        },
-        {
-            id: 3,
-            title: '명칭스피치&이미지메이킹',
-            description: '효과적인 소통과 이미지 관리 방법을 배웁니다',
-            center: '학생지원센터',
-            category: '모집중',
-            startDate: '2025.09.20',
-            endDate: '2025.10.25',
-            eventDate: '2025.10.28(월) 15:00 ~ 18:00',
-            currentParticipants: 18,
-            maxParticipants: 30,
-            hits: 176,
-            badge: '모집중',
-            badgeColor: '#27ae60'
-        },
-        {
-            id: 4,
-            title: '2학기 계슈탑트 자기이해 성장캠프',
-            description: '자기 이해와 성장을 위한 캠프 프로그램',
-            center: '상담센터',
-            category: '입박',
-            startDate: '2025.10.10',
-            endDate: '2025.11.15',
-            eventDate: '2025.11.20(목) 10:00 ~ 16:00',
-            currentParticipants: 12,
-            maxParticipants: 20,
-            hits: 134,
-            badge: '입박',
-            badgeColor: '#e74c3c'
-        }
-    ]
+    programs1: PROGRAMS
 };
 
 // Render Program Card
@@ -222,4 +282,5 @@ document.addEventListener('DOMContentLoaded', function() {
     loadPrograms();
     
     console.log('🎨 Main page loaded successfully');
+    console.log('✅ window.PROGRAMS exported with', PROGRAMS.length, 'programs');
 });

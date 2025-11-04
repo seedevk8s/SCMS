@@ -13,7 +13,7 @@ function getProgramData() {
     
     if (!program) {
         alert('프로그램 정보를 찾을 수 없습니다.');
-        window.location.href = '/program/list';
+        window.location.href = '/programs';
         return null;
     }
     
@@ -225,7 +225,7 @@ function showSuccessModal(formData) {
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline" onclick="location.href='/program/list'">
+                <button type="button" class="btn btn-outline" onclick="location.href='/programs'">
                     목록으로
                 </button>
                 <button type="button" class="btn btn-primary" onclick="location.href='/mileage/dashboard'">
@@ -241,7 +241,7 @@ function showSuccessModal(formData) {
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             document.body.removeChild(modal);
-            window.location.href = '/program/list';
+            window.location.href = '/programs';
         }
     });
 }

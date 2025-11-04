@@ -50,6 +50,16 @@ public class MainViewController {
     }
     
     /**
+     * 프로그램 신청 페이지
+     * 
+     * @return program/apply.html 템플릿
+     */
+    @GetMapping("/program/apply")
+    public String programApply() {
+        return "program/apply";
+    }
+    
+    /**
      * 마일리지 현황 페이지
      * 
      * @return mileage/dashboard.html 템플릿
