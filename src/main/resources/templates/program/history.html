@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>신청 이력 - SCMS</title>
+    <link rel="stylesheet" th:href="@{/css/program-history.css}">
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-history"></i> 신청 이력
+                </h1>
+                <p class="page-description">나의 프로그램 신청 내역을 확인하고 관리하세요.</p>
+            </div>
+        </section>
+        
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-group">
+                    <select class="form-select" id="statusFilter">
+                        <option value="">전체 상태</option>
+                        <option value="PENDING">대기중</option>
+                        <option value="APPROVED">승인됨</option>
+                        <option value="REJECTED">반려됨</option>
+                        <option value="CANCELLED">취소됨</option>
+                    </select>
+                    
+                    <select class="form-select" id="periodFilter">
+                        <option value="">전체 기간</option>
+                        <option value="1month">최근 1개월</option>
+                        <option value="3months">최근 3개월</option>
+                        <option value="6months">최근 6개월</option>
+                        <option value="1year">최근 1년</option>
+                    </select>
+                    
+                    <div class="search-box">
+                        <input type="text" class="form-control" id="searchInput" placeholder="프로그램명 검색...">
+                        <button class="btn btn-primary" id="searchBtn">
+                            <i class="fas fa-search"></i> 검색
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Summary Section -->
+        <section class="summary-section">
+            <div class="container">
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">대기중</span>
+                            <span class="summary-value" id="pendingCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon approved">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">승인됨</span>
+                            <span class="summary-value" id="approvedCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon rejected">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">반려됨</span>
+                            <span class="summary-value" id="rejectedCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon total">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">총 신청</span>
+                            <span class="summary-value" id="totalCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Applications List -->
+        <section class="applications-section">
+            <div class="container">
+                <!-- No Data Message -->
+                <div class="no-data-message" id="noDataMessage" style="display: none;">
+                    <i class="fas fa-inbox"></i>
+                    <p>신청 이력이 없습니다.</p>
+                    <a href="/program/list" class="btn btn-primary">프로그램 둘러보기</a>
+                </div>
+                
+                <!-- Applications Grid -->
+                <div class="applications-grid" id="applicationsGrid">
+                    <!-- JavaScript로 동적 생성 -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pagination -->
+        <section class="pagination-section">
+            <div class="container">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- JavaScript로 동적 생성 -->
+                    </ul>
+                </nav>
+            </div>
+        </section>
+        
+        <!-- Cancel Confirmation Modal -->
+        <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelModalLabel">
+                            <i class="fas fa-exclamation-triangle text-warning"></i> 신청 취소 확인
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>정말로 이 프로그램 신청을 취소하시겠습니까?</p>
+                        <p class="text-danger small">* 취소된 신청은 복구할 수 없습니다.</p>
+                        <div class="program-info-box mt-3">
+                            <h6 id="cancelProgramTitle"></h6>
+                            <p class="text-muted small" id="cancelApplicationDate"></p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-danger" id="confirmCancelBtn">
+                            <i class="fas fa-times"></i> 취소하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page Specific JavaScript -->
+        <script th:src="@{/js/program-history.js}"></script>
+    </div>
+</body>
+</html>
