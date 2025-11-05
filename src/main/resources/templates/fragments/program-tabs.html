@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <!-- Program Navigation Tabs Fragment -->
+    <nav th:fragment="programTabs(activeTab)" class="program-tabs">
+        <div class="container">
+            <div class="tabs-wrapper">
+                <a th:href="@{/program/history}" 
+                   th:classappend="${activeTab == 'history'} ? 'active' : ''"
+                   class="tab-link">
+                    <i class="fas fa-history"></i>
+                    <span class="tab-text">신청 이력</span>
+                </a>
+                <a th:href="@{/program/cancel}" 
+                   th:classappend="${activeTab == 'cancel'} ? 'active' : ''"
+                   class="tab-link">
+                    <i class="fas fa-ban"></i>
+                    <span class="tab-text">취소 관리</span>
+                </a>
+                <a th:href="@{/program/completion}" 
+                   th:classappend="${activeTab == 'completion'} ? 'active' : ''"
+                   class="tab-link">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="tab-text">수료 이력</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
