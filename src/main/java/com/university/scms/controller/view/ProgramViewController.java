@@ -63,4 +63,24 @@ public class ProgramViewController {
     public String history() {
         return "program/history";
     }
+    
+    /**
+     * 프로그램 신청 취소 페이지
+     * 
+     * @return program/cancel.html 템플릿
+     */
+    @GetMapping("/program/cancel")
+    public String cancel() {
+        return "program/cancel";
+    }
+    
+    /**
+     * 프로그램 수료 이력 페이지
+     * 
+     * @return program/completion.html 템플릿
+     */
+    @GetMapping("/program/completion")
+    public String completion() {
+        return "program/completion";
+    }
 }

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/default :: layout(~{::title}, ~{::content})}">
+<head>
+    <title>신청 취소 - SCMS</title>
+    <link rel="stylesheet" th:href="@{/css/program-cancel.css}">
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Page Specific CSS -->
+        <link rel="stylesheet" th:href="@{/css/program-cancel.css}">
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1 class="page-title">
+                    <i class="fas fa-ban"></i> 신청 취소
+                </h1>
+                <p class="page-description">프로그램 신청을 취소하고 관리하세요.</p>
+                <div class="breadcrumb">
+                    <a href="/program/list">프로그램 목록</a>
+                    <span class="separator">/</span>
+                    <a href="/program/history">신청 이력</a>
+                    <span class="separator">/</span>
+                    <span class="current">신청 취소</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Notice Section -->
+        <section class="notice-section">
+            <div class="container">
+                <div class="notice-box">
+                    <div class="notice-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notice-content">
+                        <h5>취소 가능 기준</h5>
+                        <ul>
+                            <li>프로그램 시작일 <strong>3일 전</strong>까지 취소 가능합니다.</li>
+                            <li>승인 대기 중인 신청은 언제든지 취소할 수 있습니다.</li>
+                            <li>취소된 신청은 <strong>복구할 수 없습니다.</strong></li>
+                            <li>프로그램 시작 후에는 취소가 불가능합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="filter-group">
+                    <select class="form-select" id="categoryFilter">
+                        <option value="">전체 분야</option>
+                        <option value="LEADERSHIP">리더십</option>
+                        <option value="CAREER">진로</option>
+                        <option value="GLOBAL">글로벌</option>
+                        <option value="VOLUNTEER">봉사</option>
+                        <option value="CREATIVE">창의</option>
+                    </select>
+                    
+                    <select class="form-select" id="statusFilter">
+                        <option value="">전체 상태</option>
+                        <option value="PENDING">승인대기</option>
+                        <option value="APPROVED">승인됨</option>
+                    </select>
+                    
+                    <div class="search-box">
+                        <input type="text" class="form-control" id="searchInput" placeholder="프로그램명 검색...">
+                        <button class="btn btn-primary" id="searchBtn">
+                            <i class="fas fa-search"></i> 검색
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Summary Section -->
+        <section class="summary-section">
+            <div class="container">
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-icon cancelable">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">취소 가능</span>
+                            <span class="summary-value" id="cancelableCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">승인 대기</span>
+                            <span class="summary-value" id="pendingCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon approved">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">승인 완료</span>
+                            <span class="summary-value" id="approvedCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="summary-icon non-cancelable">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="summary-info">
+                            <span class="summary-label">취소 불가</span>
+                            <span class="summary-value" id="nonCancelableCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cancelable Applications List -->
+        <section class="applications-section">
+            <div class="container">
+                <div class="section-header">
+                    <h3>
+                        <i class="fas fa-list-ul"></i> 취소 가능한 신청
+                        <span class="count-badge" id="displayCount">0</span>
+                    </h3>
+                    <div class="bulk-actions" style="display: none;" id="bulkActions">
+                        <button class="btn btn-outline-danger" id="bulkCancelBtn">
+                            <i class="fas fa-ban"></i> 선택 항목 취소
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- No Data Message -->
+                <div class="no-data-message" id="noDataMessage" style="display: none;">
+                    <i class="fas fa-inbox"></i>
+                    <p>취소 가능한 신청이 없습니다.</p>
+                    <a href="/program/list" class="btn btn-primary">프로그램 둘러보기</a>
+                </div>
+                
+                <!-- Applications Table -->
+                <div class="table-responsive" id="applicationsTable" style="display: none;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50">
+                                    <input type="checkbox" id="selectAll" class="form-check-input">
+                                </th>
+                                <th width="100">상태</th>
+                                <th>프로그램명</th>
+                                <th width="150">분야</th>
+                                <th width="200">신청일</th>
+                                <th width="200">프로그램 기간</th>
+                                <th width="120">취소 가능</th>
+                                <th width="150">작업</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTableBody">
+                            <!-- JavaScript로 동적 생성 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pagination -->
+        <section class="pagination-section">
+            <div class="container">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- JavaScript로 동적 생성 -->
+                    </ul>
+                </nav>
+            </div>
+        </section>
+        
+        <!-- Cancel Confirmation Modal -->
+        <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="cancelModalLabel">
+                            <i class="fas fa-exclamation-triangle"></i> 신청 취소 확인
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>주의:</strong> 취소된 신청은 복구할 수 없습니다.
+                        </div>
+                        
+                        <div class="program-info-box">
+                            <h6 class="text-primary" id="cancelProgramTitle"></h6>
+                            <div class="info-row">
+                                <span class="label">신청일:</span>
+                                <span id="cancelApplicationDate"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">프로그램 기간:</span>
+                                <span id="cancelProgramPeriod"></span>
+                            </div>
+                            <div class="info-row">
+                                <span class="label">현재 상태:</span>
+                                <span id="cancelCurrentStatus"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <label for="cancelReason" class="form-label">취소 사유 (선택)</label>
+                            <textarea class="form-control" id="cancelReason" rows="3" 
+                                      placeholder="취소 사유를 입력해주세요 (선택사항)"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times"></i> 닫기
+                        </button>
+                        <button type="button" class="btn btn-danger" id="confirmCancelBtn">
+                            <i class="fas fa-ban"></i> 취소하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bulk Cancel Modal -->
+        <div class="modal fade" id="bulkCancelModal" tabindex="-1" aria-labelledby="bulkCancelModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="bulkCancelModalLabel">
+                            <i class="fas fa-exclamation-triangle"></i> 일괄 취소 확인
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <strong>경고:</strong> 선택한 <span id="bulkCancelCount"></span>개의 신청을 모두 취소합니다.
+                        </div>
+                        
+                        <p>정말로 선택한 모든 신청을 취소하시겠습니까?</p>
+                        <p class="text-muted small">* 취소된 신청은 복구할 수 없습니다.</p>
+                        
+                        <div class="selected-programs-list" id="selectedProgramsList">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times"></i> 닫기
+                        </button>
+                        <button type="button" class="btn btn-danger" id="confirmBulkCancelBtn">
+                            <i class="fas fa-ban"></i> 일괄 취소하기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Toast -->
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-success text-white">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong class="me-auto">성공</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="successToastMessage">
+                    취소가 완료되었습니다.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page Specific JavaScript -->
+        <script th:src="@{/js/program-cancel.js}"></script>
+    </div>
+</body>
+</html>
