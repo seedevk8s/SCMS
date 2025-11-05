@@ -9,16 +9,20 @@
     <div th:fragment="content">
         <!-- Page Specific CSS -->
         <link rel="stylesheet" th:href="@{/css/program-history.css}">
+        <link rel="stylesheet" th:href="@{/css/program-tabs.css}">
 
         <!-- Page Header -->
         <section class="page-header">
             <div class="container">
                 <h1 class="page-title">
-                    <i class="fas fa-history"></i> 신청 이력
+                    <i class="fas fa-history"></i> MY 프로그램
                 </h1>
                 <p class="page-description">나의 프로그램 신청 내역을 확인하고 관리하세요.</p>
             </div>
         </section>
+        
+        <!-- Program Tabs Navigation -->
+        <div th:replace="~{fragments/program-tabs :: programTabs('history')}"></div>
         
         <!-- Filter Section -->
         <section class="filter-section">
